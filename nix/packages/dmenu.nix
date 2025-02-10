@@ -1,5 +1,5 @@
 {
-	self,
+  self,
   stdenv,
   libX11,
   libXinerama,
@@ -21,7 +21,7 @@ stdenv.mkDerivation {
     libXft
   ];
 
-  installFlags = [ "PREFIX=$(out)" ];
+  installFlags = ["PREFIX=$(out)"];
 
   meta.mainProgram = "dmenu_run";
 }
