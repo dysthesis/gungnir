@@ -1,6 +1,6 @@
 {
   self,
-	lib,
+  lib,
   stdenv,
   libX11,
   libXinerama,
