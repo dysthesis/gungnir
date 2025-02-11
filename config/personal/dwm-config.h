@@ -20,17 +20,18 @@ static const char col_gray2[] = "#191919";
 static const char col_gray3[] = "#2A2A2A";
 static const char col_gray4[] = "#444444";
 static const char col_cyan[] = "#708090";
+static const char col_white[] = "#ffffff";
 static const char *colors[][3] = {
     /*               fg         bg         border   */
-    [SchemeNorm] = {col_gray3, col_gray1, col_gray2},
-    [SchemeSel] = {col_gray4, col_cyan, col_cyan},
+    [SchemeNorm] = {col_white, col_gray1, col_gray2},
+    [SchemeSel] = {col_white, col_gray2, col_white},
 };
 
 typedef struct {
   const char *name;
   const void *cmd;
 } Sp;
-const char *spterm[] = {"st", "-n", "spterm", "-g", "180x30", NULL};
+const char *spterm[] = {"st", "-n", "term", "-g", "180x30", NULL};
 const char *spnotes[] = {
     "st",
     "-n",
@@ -46,9 +47,9 @@ const char *spsignal[] = {"signal-desktop", NULL};
 
 static Sp scratchpads[] = {
     /* name          cmd  */
-    {"spterm", spterm},
-    {"spnotes", spnotes},
-    {"spsignal", spsignal},
+    {"term", spterm},
+    {"notes", spnotes},
+    {"signal", spsignal},
 };
 
 /* tagging */
@@ -72,9 +73,9 @@ static const Rule rules[] = {
     {"Gimp", NULL, NULL, 0, 1, 0, 0, NULL, -1},
     {"Firefox", NULL, NULL, 1 << 8, 0, 0, -1, NULL, -1},
     {"St", NULL, NULL, 0, 0, 1, 0, NULL, -1},
-    {NULL, "spterm", NULL, SPTAG(0), 1, 0, 0, NULL, -1},
-    {NULL, "spnotes", NULL, SPTAG(1), 1, 0, 0, NULL, -1},
-    {NULL, "spsignal", NULL, SPTAG(2), 1, 0, 0, "50% 50% 1805W 1203H", -1},
+    {NULL, "term", NULL, SPTAG(0), 1, 0, 0, NULL, -1},
+    {NULL, "notes", NULL, SPTAG(1), 1, 0, 0, NULL, -1},
+    {NULL, "signal", NULL, SPTAG(2), 1, 0, 0, "50% 50% 1805W 1203H", -1},
 };
 
 /* layout(s) */
@@ -130,7 +131,7 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_k, movestack, {.i = -1}},
     {MODKEY | ShiftMask, XK_Return, zoom, {0}},
     {MODKEY, XK_Tab, view, {0}},
-    {MODKEY | ShiftMask, XK_c, killclient, {0}},
+    {MODKEY, XK_q, killclient, {0}},
     {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
     {MODKEY, XK_f, setlayout, {.v = &layouts[1]}},
     {MODKEY, XK_m, setlayout, {.v = &layouts[2]}},
