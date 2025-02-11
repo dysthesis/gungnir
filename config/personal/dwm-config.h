@@ -9,8 +9,8 @@ static const int showbar = 1;  /* 0 means no bar */
 static const int topbar = 0;   /* 0 means bottom bar */
 static int floatposgrid_x = 5; /* float grid columns */
 static int floatposgrid_y = 5; /* float grid rows */
-static const int user_bh = 0;  /* 0 means that dwm will calculate bar height, >=
-                                  1 means dwm will user_bh as bar height */
+static const int user_bh = 32; /* 0 means that dwm will calculate bar height, >=
+                                 1 means dwm will user_bh as bar height */
 static const char *fonts[] = {
     "JBMono Nerd Font:pixelsize=14:antialias=true:autohint=true"};
 static const char dmenufont[] =
@@ -31,13 +31,13 @@ typedef struct {
   const char *name;
   const void *cmd;
 } Sp;
-const char *spterm[] = {"st", "-n", "term", "-g", "180x30", NULL};
+const char *spterm[] = {"st", "-n", "term", "-g", "200x35", NULL};
 const char *spnotes[] = {
     "st",
     "-n",
     "notes",
     "-g",
-    "180x30",
+    "200x35",
     "-e",
     "sh",
     "-c",
@@ -144,9 +144,9 @@ static const Key keys[] = {
     {MODKEY, XK_period, focusmon, {.i = +1}},
     {MODKEY | ShiftMask, XK_comma, tagmon, {.i = -1}},
     {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
-    {MODKEY, XK_y, togglescratch, {.ui = 0}},
-    {MODKEY, XK_u, togglescratch, {.ui = 1}},
-    {MODKEY, XK_x, togglescratch, {.ui = 2}},
+    {MODKEY, XK_t, togglescratch, {.ui = 0}},
+    {MODKEY, XK_n, togglescratch, {.ui = 1}},
+    {MODKEY, XK_s, togglescratch, {.ui = 2}},
     /* Client position is limited to monitor window area */
     {Mod4Mask, XK_u, floatpos, {.v = "-26x -26y"}},      // ↖
     {Mod4Mask, XK_i, floatpos, {.v = "  0x -26y"}},      // ↑
