@@ -22,8 +22,6 @@ in
       sh
       */
       ''
-        ls -la
-        pwd
         cp ${config-file} config.h
       '';
 

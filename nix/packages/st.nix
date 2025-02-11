@@ -1,5 +1,6 @@
 {
   self,
+  config-file ? "${self}/defaults/st-config.h",
   lib,
   stdenv,
   fontconfig,
@@ -20,6 +21,14 @@ in
     src = "${self}/src/st";
 
     patches = filesInDir "${src}/patches";
+
+    postPatch =
+      /*
+      sh
+      */
+      ''
+        cp ${config-file} config.h
+      '';
 
     strictDeps = true;
 
