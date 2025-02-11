@@ -1,38 +1,45 @@
 {
   self,
+  lib,
   stdenv,
   fontconfig,
+  harfbuzz,
   freetype,
   libX11,
   libXcursor,
   libXft,
   ncurses,
   pkg-config,
-}:
-stdenv.mkDerivation {
-  pname = "st";
-  version = "0.9.2";
+}: let
+  inherit (lib.babel) filesInDir;
+in
+  stdenv.mkDerivation rec {
+    pname = "st";
+    version = "0.9.2";
 
-  src = "${self}/src/st";
+    src = "${self}/src/st";
 
-  strictDeps = true;
+    patches = filesInDir "${src}/patches";
 
-  nativeBuildInputs = [
-    freetype
-    ncurses
-    pkg-config
-  ];
+    strictDeps = true;
 
-  buildInputs = [
-    fontconfig
-    libX11
-    libXcursor
-    libXft
-  ];
+    nativeBuildInputs = [
+      freetype
+      ncurses
+      pkg-config
+    ];
 
-  installFlags = ["PREFIX=$(out)"];
+    buildInputs = [
+      harfbuzz
+      fontconfig
+      libX11
+      libXcursor
+      libXft
+    ];
 
-  env.TERMINFO = "${placeholder "out"}/share/terminfo";
+    installFlags = ["PREFIX=$(out)"];
 
-  meta.mainProgram = "st";
-}
+    env.TERMINFO = "${placeholder "out"}/share/terminfo";
+
+    meta.mainProgram = "st";
+  }
