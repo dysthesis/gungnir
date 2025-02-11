@@ -5,8 +5,9 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-static int borderpx = 2;
+static char *font =
+    "JBMono Nerd Font:pixelsize=14:antialias=true:autohint=true";
+static int borderpx = 20;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -27,7 +28,7 @@ char *vtiden = "\033[?6c";
 
 /* Kerning / character bounding-box multipliers */
 static float cwscale = 1.0;
-static float chscale = 1.0;
+static float chscale = 1.2;
 
 /*
  * word delimiter string
@@ -73,11 +74,11 @@ static unsigned int cursorthickness = 2;
  *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
  * 0: disable (render all U25XX glyphs normally from the font).
  */
-const int boxdraw = 0;
-const int boxdraw_bold = 0;
+const int boxdraw = 1;
+const int boxdraw_bold = 1;
 
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
-const int boxdraw_braille = 0;
+const int boxdraw_braille = 1;
 
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
@@ -105,30 +106,34 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* Terminal colors (16 first used in escape sequence) */
+/* Terminal colors (16 first used in escape sequence)
+ *
+ * Adapted from the lackluster.nvim kitty theme:
+ * https://github.com/slugbyte/lackluster.nvim/blob/main/extra/kitty/lackluster.conf
+ */
 static const char *colorname[] = {
+
     /* 8 normal colors */
-    "black", "red3", "green3", "yellow3", "blue2", "magenta3", "cyan3",
-    "gray90",
+    "#080808", "#D70000", "#D70000", "#FFAA88", "#7788AA", "#D7007D", "#708090",
+    "#DEEEED",
 
     /* 8 bright colors */
-    "gray50", "red", "green", "yellow", "#5c5cff", "magenta", "cyan", "white",
+    "#444444", "#D70000", "#789978", "#ffAA88", "#7788AA", "#D7007D", "#708090",
+    "#DEEEED",
 
-    [255] = 0,
-
-    /* more colors can be added after 255 to use with DefaultXX */
-    "#cccccc", "#555555", "gray90", /* default foreground colour */
-    "black",                        /* default background colour */
+    [256] = "#FFFFFF", /* default foreground colour */
+    [257] = "#000000", /* default background colour */
+    [258] = "#F5E0DC", /*575268*/
 };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 258;
-unsigned int defaultbg = 259;
-unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
+unsigned int defaultfg = 256;
+unsigned int defaultbg = 257;
+unsigned int defaultcs = 258;
+static unsigned int defaultrcs = 258;
 
 /*
  * Default shape of cursor
