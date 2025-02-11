@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font =
-    f "JBMono Nerd Font:pixelsize=16:antialias=true:autohint=true";
+    "JBMono Nerd Font:pixelsize=16:antialias=true:autohint=true";
 static int borderpx = 20;
 
 /*
