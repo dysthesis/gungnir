@@ -32,7 +32,7 @@ typedef struct {
   const void *cmd;
 } Sp;
 const char *spterm[] = {"st", "-n", "term", "-g", "190x40", NULL};
-const char *spbtop[] = {"st",     "-n", "term",  "-g",
+const char *spbtop[] = {"st",     "-n", "btop",  "-g",
                         "190x40", "-e", "-btop", NULL};
 const char *spnotes[] = {
     "st",
@@ -45,13 +45,16 @@ const char *spnotes[] = {
     "-c",
     "tmux new-session -As Notes -c ~/Documents/Notes/ 'direnv exec . nvim'",
     NULL};
+const char *spirc[] = {"st", "-n",     "irc",
+                       "-g", "190x40", "-e",
+                       "sh", "-c",     "tmux new-session -As IRC weechat",
+                       NULL};
 const char *spsignal[] = {"signal-desktop", NULL};
 
 static Sp scratchpads[] = {
     /* name          cmd  */
-    {"term", spterm},
-    {"notes", spnotes},
-    {"signal", spsignal},
+    {"term", spterm}, {"notes", spnotes},   {"btop", spbtop},
+    {"IRC", spirc},   {"signal", spsignal},
 };
 
 /* tagging */
@@ -77,7 +80,9 @@ static const Rule rules[] = {
     {"st-256color", NULL, NULL, 0, 0, 1, 0, NULL, -1},
     {NULL, "term", NULL, SPTAG(0), 1, 0, 0, NULL, -1},
     {NULL, "notes", NULL, SPTAG(1), 1, 0, 0, NULL, -1},
-    {NULL, "signal", NULL, SPTAG(2), 1, 0, 0, "50% 50% 1805W 1203H", -1},
+    {NULL, "btop", NULL, SPTAG(2), 1, 0, 0, NULL, -1},
+    {NULL, "IRC", NULL, SPTAG(3), 1, 0, 0, NULL, -1},
+    {NULL, "signal", NULL, SPTAG(4), 1, 0, 0, "50% 50% 1805W 1203H", -1},
 };
 
 /* layout(s) */
@@ -148,7 +153,9 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
     {MODKEY, XK_t, togglescratch, {.ui = 0}},
     {MODKEY, XK_n, togglescratch, {.ui = 1}},
-    {MODKEY, XK_s, togglescratch, {.ui = 2}},
+    {MODKEY, XK_b, togglescratch, {.ui = 2}},
+    {MODKEY, XK_i, togglescratch, {.ui = 3}},
+    {MODKEY, XK_s, togglescratch, {.ui = 4}},
     /* Client position is limited to monitor window area */
     {Mod4Mask, XK_u, floatpos, {.v = "-26x -26y"}},      // ↖
     {Mod4Mask, XK_i, floatpos, {.v = "  0x -26y"}},      // ↑
