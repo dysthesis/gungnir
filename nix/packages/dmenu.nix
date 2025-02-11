@@ -1,5 +1,6 @@
 {
   self,
+  config-file ? "${self}/config/default/dmenu-config.h",
   lib,
   stdenv,
   libX11,
@@ -16,6 +17,14 @@ in
     src = "${self}/src/dmenu";
 
     patches = filesInDir "${src}/patches";
+
+    postPatch =
+      /*
+      sh
+      */
+      ''
+        cp ${config-file} config.h
+      '';
 
     strictDeps = true;
 
