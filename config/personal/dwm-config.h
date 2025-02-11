@@ -31,13 +31,13 @@ typedef struct {
   const char *name;
   const void *cmd;
 } Sp;
-const char *spterm[] = {"st", "-n", "term", "-g", "210x50", NULL};
+const char *spterm[] = {"st", "-n", "term", "-g", "205x55", NULL};
 const char *spnotes[] = {
     "st",
     "-n",
     "notes",
     "-g",
-    "210x50",
+    "205x55",
     "-e",
     "sh",
     "-c",
@@ -88,9 +88,9 @@ static const int lockfullscreen =
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    {"[]=", tile}, /* first entry is default */
-    {"><>", NULL}, /* no layout function means floating behavior */
-    {"[M]", monocle},
+    {"  ", tile}, /* first entry is default */
+    {"  ", NULL}, /* no layout function means floating behavior */
+    {"   ", monocle},
 };
 
 /* key definitions */
