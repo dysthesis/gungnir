@@ -31,13 +31,15 @@ typedef struct {
   const char *name;
   const void *cmd;
 } Sp;
-const char *spterm[] = {"st", "-n", "term", "-g", "200x50", NULL};
+const char *spterm[] = {"st", "-n", "term", "-g", "190x40", NULL};
+const char *spbtop[] = {"st",     "-n", "term",  "-g",
+                        "190x40", "-e", "-btop", NULL};
 const char *spnotes[] = {
     "st",
     "-n",
     "notes",
     "-g",
-    "200x50",
+    "190x40",
     "-e",
     "sh",
     "-c",
