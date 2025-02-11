@@ -1,27 +1,32 @@
 {
   self,
+  lib,
   stdenv,
   libX11,
   libXinerama,
   libXft,
   zlib,
-}:
-stdenv.mkDerivation {
-  pname = "dmenu";
-  version = "5.3";
+}: let
+  inherit (lib.babel) filesInDir;
+in
+  stdenv.mkDerivation rec {
+    pname = "dmenu";
+    version = "5.3";
 
-  src = "${self}/src/dmenu";
+    src = "${self}/src/dmenu";
 
-  strictDeps = true;
+    patches = filesInDir "${src}/patches";
 
-  buildInputs = [
-    libX11
-    libXinerama
-    zlib
-    libXft
-  ];
+    strictDeps = true;
 
-  installFlags = ["PREFIX=$(out)"];
+    buildInputs = [
+      libX11
+      libXinerama
+      zlib
+      libXft
+    ];
 
-  meta.mainProgram = "dmenu_run";
-}
+    installFlags = ["PREFIX=$(out)"];
+
+    meta.mainProgram = "dmenu_run";
+  }
