@@ -31,13 +31,13 @@ typedef struct {
   const char *name;
   const void *cmd;
 } Sp;
-const char *spterm[] = {"st", "-n", "term", "-g", "200x35", NULL};
+const char *spterm[] = {"st", "-n", "term", "-g", "210x50", NULL};
 const char *spnotes[] = {
     "st",
     "-n",
     "notes",
     "-g",
-    "200x35",
+    "210x50",
     "-e",
     "sh",
     "-c",
@@ -112,7 +112,7 @@ static char dmenumon[2] =
     "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {
     "dmenu_run", "-m",  dmenumon,  "-fn", dmenufont, "-nb", col_gray1, "-nf",
-    col_gray3,   "-sb", col_white, "-sf", col_gray4, NULL};
+    col_white,   "-sb", col_gray2, "-sf", col_white, NULL};
 static const char *termcmd[] = {"st", NULL};
 
 #include "movestack.c"
