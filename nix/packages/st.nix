@@ -1,6 +1,6 @@
 {
   self,
-  config-file ? "${self}/defaults/st-config.h",
+  config-file ? "${self}/config/default/st-config.h",
   lib,
   stdenv,
   fontconfig,

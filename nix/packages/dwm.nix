@@ -1,6 +1,6 @@
 {
   self,
-  config-file ? "${self}/defaults/dwm-config.h",
+  config-file ? "${self}/config/default/dwm-config.h",
   lib,
   stdenv,
   libX11,
