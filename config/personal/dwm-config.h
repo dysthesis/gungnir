@@ -32,8 +32,7 @@ typedef struct {
   const void *cmd;
 } Sp;
 const char *spterm[] = {"st", "-n", "term", "-g", "190x40", NULL};
-const char *spbtop[] = {"st",     "-n", "btop",  "-g",
-                        "190x40", "-e", "-btop", NULL};
+const char *spbtop[] = {"st", "-n", "btop", "-g", "190x40", "-e", "btop", NULL};
 const char *spnotes[] = {
     "st",
     "-n",
@@ -45,7 +44,7 @@ const char *spnotes[] = {
     "-c",
     "tmux new-session -As Notes -c ~/Documents/Notes/ 'direnv exec . nvim'",
     NULL};
-const char *spirc[] = {"st", "-n",     "irc",
+const char *spirc[] = {"st", "-n",     "IRC",
                        "-g", "190x40", "-e",
                        "sh", "-c",     "tmux new-session -As IRC weechat",
                        NULL};
