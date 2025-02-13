@@ -22,4 +22,5 @@
     inherit self lib;
     config-file = "${self}/config/personal/st-config.h";
   };
+  dwm-bar = pkgs.callPackage ./dwm-bar.nix {inherit pkgs lib;};
 }
