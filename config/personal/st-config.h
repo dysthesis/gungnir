@@ -114,11 +114,11 @@ unsigned int tabspaces = 8;
 static const char *colorname[] = {
 
     /* 8 normal colors */
-    "#080808", "#D70000", "#D70000", "#FFAA88", "#7788AA", "#D7007D", "#708090",
+    "#080808", "#D70000", "#789978", "#FFAA88", "#7788AA", "#D7007D", "#708090",
     "#DEEEED",
 
     /* 8 bright colors */
-    "#444444", "#D70000", "#789978", "#ffAA88", "#7788AA", "#D7007D", "#708090",
+    "#444444", "#D70000", "#789978", "#FFAA88", "#7788AA", "#D7007D", "#708090",
     "#DEEEED",
 
     [256] = "#FFFFFF", /* default foreground colour */
