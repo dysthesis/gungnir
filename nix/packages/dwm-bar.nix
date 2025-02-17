@@ -56,6 +56,6 @@ in
       [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ]
       interval=$((interval + 1))
 
-      sleep 1 && ${xsetroot} -name "$(volume)$(brightness)$(battery)$(cpu)$(mem)$(clock)"
+      sleep 1 && ${xsetroot} -name " $(volume)$(brightness)$(battery)$(cpu)$(mem)$(clock) "
     done
   ''
