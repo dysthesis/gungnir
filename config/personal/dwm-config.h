@@ -42,7 +42,7 @@ const char *spnotes[] = {
     "-e",
     "sh",
     "-c",
-    "tmux new-session -As Notes -c ~/Documents/Notes/ 'direnv exec . nvim'",
+    "tmux new-session -As Notes -c ~/Documents/Notes/Contents 'direnv exec . nvim'",
     NULL};
 const char *spirc[] = {"st", "-n",     "IRC",
                        "-g", "190x40", "-e",
