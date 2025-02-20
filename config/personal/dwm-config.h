@@ -33,17 +33,17 @@ typedef struct {
 } Sp;
 const char *spterm[] = {"st", "-n", "term", "-g", "190x40", NULL};
 const char *spbtop[] = {"st", "-n", "btop", "-g", "190x40", "-e", "btop", NULL};
-const char *spnotes[] = {
-    "st",
-    "-n",
-    "notes",
-    "-g",
-    "190x40",
-    "-e",
-    "sh",
-    "-c",
-    "tmux new-session -As Notes -c ~/Documents/Notes/Contents 'direnv exec . nvim'",
-    NULL};
+const char *spnotes[] = {"st",
+                         "-n",
+                         "notes",
+                         "-g",
+                         "190x40",
+                         "-e",
+                         "sh",
+                         "-c",
+                         "tmux new-session -As Notes -c "
+                         "~/Documents/Notes/Contents 'direnv exec . nvim'",
+                         NULL};
 const char *spirc[] = {"st", "-n",     "IRC",
                        "-g", "190x40", "-e",
                        "sh", "-c",     "tmux new-session -As IRC weechat",
@@ -121,9 +121,20 @@ static const char *dmenucmd[] = {
     col_white,   "-sb", col_gray2, "-shb", col_gray2, "-sf", col_white, NULL};
 static const char *termcmd[] = {"st", NULL};
 
+static const char *upbright[] = {"brightnessctl", "set", "5%+", NULL};
+static const char *downbright[] = {"brightnessctl", "set", "5%-", NULL};
+static const char *upvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
+                              "5%+", NULL};
+static const char *downvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
+                                "5%-", NULL};
+
 #include "movestack.c"
 static const Key keys[] = {
     /* modifier                     key        function        argument */
+    {0, XK_AudioRaiseVolume, spawn, {.v = upvol}},
+    {0, XK_AudioLowerVolume, spawn, {.v = downvol}},
+    {0, XK_MonBrightnessUp, spawn, {.v = upbright}},
+    {0, XK_MonBrightnessDown, spawn, {.v = downbright}},
     {MODKEY, XK_r, spawn, {.v = dmenucmd}},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
     /*{MODKEY, XK_b, togglebar, {0}},*/
@@ -145,8 +156,8 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_space, togglefloating, {0}},
     {MODKEY | ShiftMask, XK_f, togglefullscr, {0}},
     {MODKEY, XK_0, view, {.ui = ~0}},
-    {MODKEY | ShiftMask, XK_0, tag, {.ui = ~0}},
-    {MODKEY, XK_comma, focusmon, {.i = -1}},
+    {MODKEY | ShiftMask, XK_0, tag, {.ui = ~0}} X{
+        MODKEY, XK_comma, focusmon, {.i = -1}},
     {MODKEY, XK_period, focusmon, {.i = +1}},
     {MODKEY | ShiftMask, XK_comma, tagmon, {.i = -1}},
     {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
