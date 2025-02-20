@@ -131,10 +131,10 @@ static const char *downvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
 #include "movestack.c"
 static const Key keys[] = {
     /* modifier                     key        function        argument */
-    {0, XK_AudioRaiseVolume, spawn, {.v = upvol}},
-    {0, XK_AudioLowerVolume, spawn, {.v = downvol}},
-    {0, XK_MonBrightnessUp, spawn, {.v = upbright}},
-    {0, XK_MonBrightnessDown, spawn, {.v = downbright}},
+    {0, XF86XK_AudioRaiseVolume, spawn, {.v = upvol}},
+    {0, XF86XK_AudioLowerVolume, spawn, {.v = downvol}},
+    {0, XF86XK_MonBrightnessUp, spawn, {.v = upbright}},
+    {0, XF86XK_MonBrightnessDown, spawn, {.v = downbright}},
     {MODKEY, XK_r, spawn, {.v = dmenucmd}},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
     /*{MODKEY, XK_b, togglebar, {0}},*/
