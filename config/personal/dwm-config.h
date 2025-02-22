@@ -76,7 +76,6 @@ static const Rule rules[] = {
        noswallow  floatpos  monitor */
     {"zen", NULL, NULL, 1 << 0, 0, 0, -1, NULL, -1},
     {"vesktop", NULL, NULL, 1 << 2, 0, 0, -1, NULL, -1},
-    {"mpv", NULL, NULL, 1 << 3, 0, 0, -1, NULL, -1},
     {".virt-manager-wrapped", NULL, NULL, 1 << 4, 0, 0, -1, NULL, -1},
     {"st-256color", NULL, NULL, 0, 0, 1, 0, NULL, -1},
     {NULL, "term", NULL, SPTAG(0), 1, 0, 0, NULL, -1},
