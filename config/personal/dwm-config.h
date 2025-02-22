@@ -74,8 +74,10 @@ static const Rule rules[] = {
      */
     /* class     instance      title    tags mask  isfloating  isterminal
        noswallow  floatpos  monitor */
-    {"Gimp", NULL, NULL, 0, 1, 0, 0, NULL, -1},
-    {"Firefox", NULL, NULL, 1 << 8, 0, 0, -1, NULL, -1},
+    {"zen", NULL, NULL, 1 << 0, 0, 0, -1, NULL, -1},
+    {"vesktop", NULL, NULL, 1 << 2, 0, 0, -1, NULL, -1},
+    {"mpv", NULL, NULL, 1 << 3, 0, 0, -1, NULL, -1},
+    {".virt-manager-wrapped", NULL, NULL, 1 << 4, 0, 0, -1, NULL, -1},
     {"st-256color", NULL, NULL, 0, 0, 1, 0, NULL, -1},
     {NULL, "term", NULL, SPTAG(0), 1, 0, 0, NULL, -1},
     {NULL, "notes", NULL, SPTAG(1), 1, 0, 0, NULL, -1},
