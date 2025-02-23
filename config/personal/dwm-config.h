@@ -33,6 +33,8 @@ typedef struct {
 } Sp;
 const char *spterm[] = {"st", "-n", "term", "-g", "190x40", NULL};
 const char *spbtop[] = {"st", "-n", "btop", "-g", "190x40", "-e", "btop", NULL};
+const char *spspot[] = {"st",     "-n", "spotify",        "-g",
+                        "190x40", "-e", "spotify_player", NULL};
 const char *spnotes[] = {"st",
                          "-n",
                          "notes",
@@ -53,8 +55,7 @@ const char *spsignal[] = {"signal-desktop", NULL};
 static Sp scratchpads[] = {
     /* name          cmd  */
     {"term", spterm}, {"notes", spnotes},   {"btop", spbtop},
-    {"IRC", spirc},   {"signal", spsignal},
-};
+    {"IRC", spirc},   {"signal", spsignal}, {"spotify", spspot}};
 
 /* tagging */
 static const char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -83,6 +84,7 @@ static const Rule rules[] = {
     {NULL, "btop", NULL, SPTAG(2), 1, 0, 0, NULL, -1},
     {NULL, "IRC", NULL, SPTAG(3), 1, 0, 0, NULL, -1},
     {NULL, "signal", NULL, SPTAG(4), 1, 0, 0, "50% 50% 1805W 1203H", -1},
+    {NULL, "spotify", NULL, SPTAG(5), 1, 0, 0, NULL, -1},
 };
 
 /* layout(s) */
@@ -167,6 +169,7 @@ static const Key keys[] = {
     {MODKEY, XK_b, togglescratch, {.ui = 2}},
     {MODKEY, XK_i, togglescratch, {.ui = 3}},
     {MODKEY, XK_s, togglescratch, {.ui = 4}},
+    {MODKEY, XK_m, togglescratch, {.ui = 5}},
     /* Client position is limited to monitor window area */
     {Mod4Mask, XK_u, floatpos, {.v = "-26x -26y"}},      // ↖
     {Mod4Mask, XK_i, floatpos, {.v = "  0x -26y"}},      // ↑
