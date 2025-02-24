@@ -12,7 +12,7 @@
   # Personal configurations
   dwm = pkgs.callPackage ./dwm.nix {
     inherit self lib;
-    config-file = "${self}/config/personal/dwm-config.h";
+    config-file = builtins.trace "${import ../../config/personal/dwm.nix {inherit lib pkgs;}}" import ../../config/personal/dwm.nix {inherit lib pkgs;};
   };
   dmenu = pkgs.callPackage ./dmenu.nix {
     inherit self lib;
