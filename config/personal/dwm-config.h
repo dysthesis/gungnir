@@ -33,6 +33,8 @@ typedef struct {
 } Sp;
 const char *spterm[] = {"st", "-n", "term", "-g", "190x40", NULL};
 const char *spbtop[] = {"st", "-n", "btop", "-g", "190x40", "-e", "btop", NULL};
+const char *sptask[] = {
+    "st", "-n", "task", "-g", "190x40", "-e", "taskwarrior-tui", NULL};
 const char *spspot[] = {"st",     "-n", "spotify",        "-g",
                         "190x40", "-e", "spotify_player", NULL};
 const char *spnotes[] = {"st",
@@ -54,8 +56,8 @@ const char *spsignal[] = {"signal-desktop", NULL};
 
 static Sp scratchpads[] = {
     /* name          cmd  */
-    {"term", spterm}, {"notes", spnotes},   {"btop", spbtop},
-    {"IRC", spirc},   {"signal", spsignal}, {"spotify", spspot}};
+    {"term", spterm},     {"notes", spnotes},  {"btop", spbtop}, {"IRC", spirc},
+    {"signal", spsignal}, {"spotify", spspot}, {"task", sptask}};
 
 /* tagging */
 static const char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -85,6 +87,7 @@ static const Rule rules[] = {
     {NULL, "IRC", NULL, SPTAG(3), 1, 0, 0, NULL, -1},
     {NULL, "signal", NULL, SPTAG(4), 1, 0, 0, "50% 50% 1805W 1203H", -1},
     {NULL, "spotify", NULL, SPTAG(5), 1, 0, 0, NULL, -1},
+    {NULL, "task", NULL, SPTAG(6), 1, 0, 0, NULL, -1},
 };
 
 /* layout(s) */
@@ -171,6 +174,7 @@ static const Key keys[] = {
     {MODKEY, XK_i, togglescratch, {.ui = 3}},
     {MODKEY, XK_s, togglescratch, {.ui = 4}},
     {MODKEY, XK_m, togglescratch, {.ui = 5}},
+    {MODKEY, XK_d, togglescratch, {.ui = 6}},
     /* Client position is limited to monitor window area */
     {Mod4Mask, XK_u, floatpos, {.v = "-26x -26y"}},      // ↖
     {Mod4Mask, XK_i, floatpos, {.v = "  0x -26y"}},      // ↑
