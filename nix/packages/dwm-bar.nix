@@ -54,13 +54,17 @@ in
     }
 
     taskwarrior() {
-     printf " "
+     printf "  "
 
-     # Get the next task
-     echo "$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:description rc.report.next.labels:1 limit:1 next)"
+     is_ready=$(${getExe taskwarrior} task ready)
+     if [ -z is_ready ] then
+       printf "No tasks"
+     else
+       next_desc=$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:description rc.report.next.labels:1 limit:1 next)
+       next_due=$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:due.relative rc.report.next.labels:1 limit:1 next)
 
-     # and its due date
-     echo "$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:due.relative rc.report.next.labels:1 limit:1 next)"
+       echo "$next_desc due in $next_due"
+     fi
      echo "$DELIMITER"
     }
 
