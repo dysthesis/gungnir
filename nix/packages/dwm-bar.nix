@@ -57,7 +57,7 @@ in
      printf "  "
 
      is_ready=$(${getExe taskwarrior} task ready)
-     if [ -z is_ready ] then
+     if [ -z is_ready ]; then
        printf "No tasks"
      else
        next_desc=$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:description rc.report.next.labels:1 limit:1 next)
