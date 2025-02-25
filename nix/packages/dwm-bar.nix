@@ -56,12 +56,12 @@ in
     taskwarrior() {
      printf "  "
 
-     is_ready=$(${getExe taskwarrior} task ready)
+     is_ready=$(${taskwarrior}/bin/task task ready)
      if [ -z is_ready ]; then
        printf "No tasks"
      else
-       next_desc=$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:description rc.report.next.labels:1 limit:1 next)
-       next_due=$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:due.relative rc.report.next.labels:1 limit:1 next)
+       next_desc=$(${taskwarrior}/bin/task rc.verbose: rc.report.next.columns:description rc.report.next.labels:1 limit:1 next)
+       next_due=$(${taskwarrior}/bin/task rc.verbose: rc.report.next.columns:due.relative rc.report.next.labels:1 limit:1 next)
 
        echo "$next_desc due in $next_due"
      fi
