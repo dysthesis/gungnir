@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  taskwarrior ? pkgs.taskwarrior,
   ...
 }: let
   inherit (pkgs) writeShellScriptBin;
@@ -52,10 +53,21 @@ in
       fi
     }
 
+    taskwarrior() {
+     printf " "
+
+     # Get the next task
+     echo "$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:description rc.report.next.labels:1 limit:1 next)"
+
+     # and its due date
+     echo "$(${getExe taskwarrior} rc.verbose: rc.report.next.columns:due.relative rc.report.next.labels:1 limit:1 next)"
+     echo "$DELIMITER"
+    }
+
     while true; do
       [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ]
       interval=$((interval + 1))
 
-      sleep 1 && ${xsetroot} -name " $(volume)$(brightness)$(battery)$(cpu)$(mem)$(clock) "
+      sleep 1 && ${xsetroot} -name " $(taskwarrior)$(volume)$(brightness)$(battery)$(cpu)$(mem)$(clock) "
     done
   ''
