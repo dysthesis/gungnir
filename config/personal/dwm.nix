@@ -286,8 +286,6 @@ in
           /*{MODKEY, XK_b, togglebar, {0}},*/
           {MODKEY, XK_j, focusstack, {.i = +1}},
           {MODKEY, XK_k, focusstack, {.i = -1}},
-          {MODKEY, XK_i, incnmaster, {.i = +1}},
-          {MODKEY, XK_d, incnmaster, {.i = -1}},
           {MODKEY, XK_h, setmfact, {.f = -0.05}},
           {MODKEY, XK_l, setmfact, {.f = +0.05}},
           {MODKEY | ShiftMask, XK_j, movestack, {.i = +1}},
@@ -309,45 +307,6 @@ in
           {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
           ${concatStringsSep "\n" (map mkScratchpadKey scratchpads)}
           /* Client position is limited to monitor window area */
-          {Mod4Mask, XK_u, floatpos, {.v = "-26x -26y"}},      // ↖
-          {Mod4Mask, XK_i, floatpos, {.v = "  0x -26y"}},      // ↑
-          {Mod4Mask, XK_o, floatpos, {.v = " 26x -26y"}},      // ↗
-          {Mod4Mask, XK_j, floatpos, {.v = "-26x   0y"}},      // ←
-          {Mod4Mask, XK_l, floatpos, {.v = " 26x   0y"}},      // →
-          {Mod4Mask, XK_m, floatpos, {.v = "-26x  26y"}},      // ↙
-          {Mod4Mask, XK_comma, floatpos, {.v = "  0x  26y"}},  // ↓
-          {Mod4Mask, XK_period, floatpos, {.v = " 26x  26y"}}, // ↘
-          /* Absolute positioning (allows moving windows between monitors) */
-          {Mod4Mask | ControlMask, XK_u, floatpos, {.v = "-26a -26a"}},      // ↖
-          {Mod4Mask | ControlMask, XK_i, floatpos, {.v = "  0a -26a"}},      // ↑
-          {Mod4Mask | ControlMask, XK_o, floatpos, {.v = " 26a -26a"}},      // ↗
-          {Mod4Mask | ControlMask, XK_j, floatpos, {.v = "-26a   0a"}},      // ←
-          {Mod4Mask | ControlMask, XK_l, floatpos, {.v = " 26a   0a"}},      // →
-          {Mod4Mask | ControlMask, XK_m, floatpos, {.v = "-26a  26a"}},      // ↙
-          {Mod4Mask | ControlMask, XK_comma, floatpos, {.v = "  0a  26a"}},  // ↓
-          {Mod4Mask | ControlMask, XK_period, floatpos, {.v = " 26a  26a"}}, // ↘
-          /* Resize client, client center position is fixed which means that client
-             expands in all directions */
-          {Mod4Mask | ShiftMask, XK_u, floatpos, {.v = "-26w -26h"}},      // ↖
-          {Mod4Mask | ShiftMask, XK_i, floatpos, {.v = "  0w -26h"}},      // ↑
-          {Mod4Mask | ShiftMask, XK_o, floatpos, {.v = " 26w -26h"}},      // ↗
-          {Mod4Mask | ShiftMask, XK_j, floatpos, {.v = "-26w   0h"}},      // ←
-          {Mod4Mask | ShiftMask, XK_k, floatpos, {.v = "800W 800H"}},      // ·
-          {Mod4Mask | ShiftMask, XK_l, floatpos, {.v = " 26w   0h"}},      // →
-          {Mod4Mask | ShiftMask, XK_m, floatpos, {.v = "-26w  26h"}},      // ↙
-          {Mod4Mask | ShiftMask, XK_comma, floatpos, {.v = "  0w  26h"}},  // ↓
-          {Mod4Mask | ShiftMask, XK_period, floatpos, {.v = " 26w  26h"}}, // ↘
-          /* Client is positioned in a floating grid, movement is relative to client's
-             current position */
-          {Mod4Mask | Mod1Mask, XK_u, floatpos, {.v = "-1p -1p"}},      // ↖
-          {Mod4Mask | Mod1Mask, XK_i, floatpos, {.v = " 0p -1p"}},      // ↑
-          {Mod4Mask | Mod1Mask, XK_o, floatpos, {.v = " 1p -1p"}},      // ↗
-          {Mod4Mask | Mod1Mask, XK_j, floatpos, {.v = "-1p  0p"}},      // ←
-          {Mod4Mask | Mod1Mask, XK_k, floatpos, {.v = " 0p  0p"}},      // ·
-          {Mod4Mask | Mod1Mask, XK_l, floatpos, {.v = " 1p  0p"}},      // →
-          {Mod4Mask | Mod1Mask, XK_m, floatpos, {.v = "-1p  1p"}},      // ↙
-          {Mod4Mask | Mod1Mask, XK_comma, floatpos, {.v = " 0p  1p"}},  // ↓
-          {Mod4Mask | Mod1Mask, XK_period, floatpos, {.v = " 1p  1p"}}, // ↘
           TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
               TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
                   TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q, quit, {0}},
