@@ -14,7 +14,7 @@ in {
   dwm = {
     borderpx ? 1,
     topbar ? 0,
-    font ? "JBMono Nerd Font",
+    font ? "CartographCF Nerd Font",
     fontSize ? 12,
     colours ? {
       gray1 = "#080808";
