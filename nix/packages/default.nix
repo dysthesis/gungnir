@@ -4,11 +4,17 @@
   pkgs,
   ...
 }: let
+  sources = import ./npins;
 in {
   # Default configurations
   dwm-default = pkgs.callPackage ./dwm.nix {inherit self lib;};
   dmenu-default = pkgs.callPackage ./dmenu.nix {inherit self lib;};
   st-default = pkgs.callPackage ./st.nix {inherit self lib;};
+
+  dwl-default = pkgs.callPackage ./dwl.nix {
+    inherit self lib;
+    inherit (sources) dwl;
+  };
 
   # Personal configurations
   dwm = {

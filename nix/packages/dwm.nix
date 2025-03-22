@@ -6,6 +6,7 @@
   libX11,
   libXinerama,
   libXft,
+  dwm,
 }: let
   inherit (lib.babel) filesInDir;
 in
