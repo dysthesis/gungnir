@@ -30,8 +30,8 @@ in
       static const char *colors[][2] = {
           /*     fg         bg       */
           [SchemeNorm] = {"#ffffff", "#000000"},
-          [SchemeSel] = {"#708090", "#555555"},
-          [SchemeSelHighlight] = {"#7788AA", "#555555"},
+          [SchemeSel] = {"#708090", "#191919"},
+          [SchemeSelHighlight] = {"#7788AA", "#191919"},
           [SchemeNormHighlight] = {"#7788AA", "#000000"},
           [SchemeOut] = {"#000000", "#00ffff"},
       };
