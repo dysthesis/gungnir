@@ -1,7 +1,6 @@
 {
   self,
   lib,
-  fetchFromGitea,
   installShellFiles,
   libX11,
   libinput,
@@ -68,6 +67,8 @@ assert withCustomConfigH -> (configH != null);
       ];
 
     outputs = ["out"];
+
+    prePatch = "pwd";
 
     postPatch = let
       configFile =
