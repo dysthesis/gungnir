@@ -16,6 +16,13 @@ in {
     inherit (sources) dwl;
   };
 
+  dwl = pkgs.callPackage ./dwl.nix {
+    inherit self lib;
+    inherit (sources) dwl;
+    withCustomConfigH = true;
+    configH = import ../../config/personal/dwl.nix {inherit pkgs;};
+  };
+
   # Personal configurations
   dwm = {
     borderpx ? 1,

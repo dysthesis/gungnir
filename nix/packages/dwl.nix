@@ -17,6 +17,7 @@
   writeText,
   xcbutilwm,
   xwayland,
+  extraPackages ? [],
   # Boolean flags
   enableXWayland ? true,
   withCustomConfigH ? (configH != null),
@@ -64,11 +65,10 @@ assert withCustomConfigH -> (configH != null);
         libX11
         xcbutilwm
         xwayland
-      ];
+      ]
+      ++ extraPackages;
 
     outputs = ["out"];
-
-    prePatch = "pwd";
 
     postPatch = let
       configFile =
@@ -90,7 +90,7 @@ assert withCustomConfigH -> (configH != null);
       ];
 
     postInstall = ''
-      cp config.def.h $out/
+      cp config.h $out/
     '';
 
     strictDeps = true;
