@@ -195,7 +195,7 @@ index 145fd01..d4f3603 100644
 +			.y = newy,
 +			.width = neww,
 +			.height = newh,
-+		}, 1, 1);
++		}, 1);
 +	}
  }
  
@@ -250,7 +250,7 @@ index 145fd01..d4f3603 100644
 +			.y = (b.height - newh) / 2 + b.y,
 +			.width = neww,
 +			.height = newh,
-+		}, 1, 1);
++		}, 1);
 +	}
 +}
 +
@@ -279,7 +279,7 @@ index 145fd01..d4f3603 100644
 +			.y = (b.height - newh) / 2 + b.y,
 +			.width = neww,
 +			.height = newh,
-+		}, 1, 1);
++		}, 1);
 +	}
 +}
 +
@@ -308,7 +308,7 @@ index 145fd01..d4f3603 100644
 +			.y = (b.height - newh) / 2 + b.y,
 +			.width = neww,
 +			.height = newh,
-+		}, 1, 1);
++		}, 1);
 +	}
 +}
 +
@@ -347,7 +347,7 @@ index 145fd01..d4f3603 100644
 +			.y = (b.height - c->geom.height) / 2 + b.y,
 +			.width = c->geom.width,
 +			.height = c->geom.height,
-+		}, interact, 1);
++		}, interact);
 +	}
 +}
 +
