@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   borderpx ? 1,
   bordercolor ? "0x080808ff",
   focuscolor ? "0xffffffff",
@@ -8,6 +9,32 @@
   ...
 }: let
   inherit (pkgs) writeText;
+  inherit
+    (lib)
+    mapAttrsToList
+    fold
+    ;
+  inherit
+    (builtins)
+    typeOf
+    concatStringsSep
+    ;
+  mkRule = rules: let
+    formatValue = value:
+      if typeOf value == "str"
+      then "\"${value}\""
+      else value;
+    formatRule = key: value: ".${key} = ${formatValue value}";
+    formattedRules = rules: mapAttrsToList (key: value: formatRule key value) rules;
+    finalRule = rules: "RULE(${concatStringsSep ", " (formattedRules rules)})";
+  in
+    fold
+    (curr: acc: ''
+      ${acc}
+      ${finalRule curr}
+    '')
+    ""
+    rules;
 in
   writeText "config.h"
   /*
