@@ -5,6 +5,7 @@
   ...
 }: let
   sources = import ./npins;
+  inherit (lib) makeOverrideable;
 in {
   # Default configurations
   dwm-default = pkgs.callPackage ./dwm.nix {inherit self lib;};
@@ -16,11 +17,12 @@ in {
     inherit (sources) dwl;
   };
 
-  dwl = pkgs.callPackage ./dwl.nix {
+  dwl = makeOverrideable pkgs.callPackage ./dwl.nix {
     inherit self lib;
     inherit (sources) dwl;
     withCustomConfigH = true;
     configH = import ../../config/personal/dwl.nix {inherit pkgs;};
+    enableXWayland = true;
   };
 
   # Personal configurations
