@@ -6,18 +6,19 @@
 }: let
   sources = import ./npins;
   inherit (lib) makeOverrideable;
+  inherit (pkgs) callPackage;
 in {
   # Default configurations
-  dwm-default = pkgs.callPackage ./dwm.nix {inherit self lib;};
-  dmenu-default = pkgs.callPackage ./dmenu.nix {inherit self lib;};
-  st-default = pkgs.callPackage ./st.nix {inherit self lib;};
+  dwm-default = callPackage ./dwm.nix {inherit self lib;};
+  dmenu-default = callPackage ./dmenu.nix {inherit self lib;};
+  st-default = callPackage ./st.nix {inherit self lib;};
 
-  dwl-default = pkgs.callPackage ./dwl.nix {
+  dwl-default = callPackage ./dwl.nix {
     inherit self lib;
     inherit (sources) dwl;
   };
 
-  dwl = makeOverrideable pkgs.callPackage ./dwl.nix {
+  dwl = makeOverrideable callPackage ./dwl.nix {
     inherit self lib;
     inherit (sources) dwl;
     withCustomConfigH = true;
@@ -41,7 +42,7 @@ in {
     },
     scratchpads ? [],
   }:
-    pkgs.callPackage ./dwm.nix {
+    callPackage ./dwm.nix {
       inherit self lib;
       config-file = import ../../config/personal/dwm.nix {
         inherit lib pkgs;
@@ -53,7 +54,7 @@ in {
     font ? "JBMono Nerd Font",
     lineHeight ? 32,
   }:
-    pkgs.callPackage ./dmenu.nix {
+    callPackage ./dmenu.nix {
       inherit self lib;
       config-file = import ../../config/personal/dmenu.nix {
         inherit lib pkgs;
@@ -95,7 +96,7 @@ in {
       highlight = "#F5E0DC";
     },
   }:
-    pkgs.callPackage ./st.nix {
+    callPackage ./st.nix {
       inherit self lib;
       config-file = import ../../config/personal/st.nix {
         inherit lib pkgs;
@@ -103,5 +104,5 @@ in {
       };
     };
 
-  dwm-bar = pkgs.callPackage ./dwm-bar.nix {inherit pkgs lib;};
+  dwm-bar = callPackage ./dwm-bar.nix {inherit pkgs lib;};
 }
