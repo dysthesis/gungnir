@@ -42,7 +42,7 @@ in
     static int log_level = WLR_ERROR;
 
     static const char *const autostart[] = {
-      ${autostart},
+      ${autostart}
       NULL
     };
 

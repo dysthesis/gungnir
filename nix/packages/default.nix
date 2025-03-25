@@ -24,7 +24,7 @@ in {
     withCustomConfigH = true;
     configH = import ../../config/personal/dwl.nix {inherit pkgs lib autostart;};
     enableXWayland = true;
-    autostart = ''"echo"'';
+    autostart = "";
   };
 
   # Personal configurations
