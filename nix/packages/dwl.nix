@@ -35,6 +35,7 @@
   # Remove them before next version of either Nixpkgs or dwl itself
   conf ? null,
   dwl,
+  ...
 }:
 # If we set withCustomConfigH, let's not forget configH
 assert withCustomConfigH -> (configH != null);
