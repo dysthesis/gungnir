@@ -6,8 +6,12 @@
 }: let
   sources = import ./npins;
   inherit (lib) makeOverridable;
-  inherit (pkgs) callPackage;
-in {
+  inherit
+    (pkgs)
+    callPackage
+    writeText
+    ;
+in rec {
   # Default configurations
   dwm-default = callPackage ./dwm.nix {inherit self lib;};
   dmenu-default = callPackage ./dmenu.nix {inherit self lib;};
@@ -18,13 +22,17 @@ in {
     inherit (sources) dwl;
   };
 
+  dwl-config = makeOverridable writeText "config.h" (import ../../config/personal/dwl.nix {
+    inherit pkgs lib;
+    autostart = "";
+  });
+
   dwl = makeOverridable callPackage ./dwl.nix rec {
     inherit self lib;
     inherit (sources) dwl;
     withCustomConfigH = true;
-    configH = import ../../config/personal/dwl.nix {inherit pkgs lib autostart;};
+    configH = dwl-config;
     enableXWayland = true;
-    autostart = "";
   };
 
   # Personal configurations
