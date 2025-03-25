@@ -39,6 +39,7 @@
 }:
 # If we set withCustomConfigH, let's not forget configH
 assert withCustomConfigH -> (configH != null);
+  builtins.trace "${configH}"
   stdenv.mkDerivation (finalAttrs: {
     pname = "dwl";
     version = "0.7";
