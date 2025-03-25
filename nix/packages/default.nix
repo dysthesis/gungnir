@@ -22,10 +22,10 @@ in rec {
     inherit (sources) dwl;
   };
 
-  dwl-config = makeOverridable writeText "config.h" (import ../../config/personal/dwl.nix {
+  dwl-config = makeOverridable callPackage ../../config/personal/dwl.nix {
     inherit pkgs lib;
     autostart = "";
-  });
+  };
 
   dwl = makeOverridable callPackage ./dwl.nix rec {
     inherit self lib;
