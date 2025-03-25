@@ -1,6 +1,6 @@
 {
   pkgs,
-  lib,
+  autostart ? ''"echo"'',
   borderpx ? 1,
   bordercolor ? "0x080808ff",
   focuscolor ? "0xffffffff",
@@ -40,6 +40,12 @@ in
 
     /* logging */
     static int log_level = WLR_ERROR;
+
+    static const char *const autostart[] = {
+      ${autostart},
+      NULL
+    };
+
 
     /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
     #define RULE(...) { .monitor = -1, __VA_ARGS__ }
