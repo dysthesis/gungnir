@@ -52,7 +52,8 @@ in
 
       SCRATCH(.id = "ghostty.term", .isterm = 1, .scratchkey = 't'),
       SCRATCH(.id = "ghostty.note", .isterm = 1, .scratchkey = 'n'),
-      SCRATCH(.id = "signal", .scratchkey = 'n'),
+      SCRATCH(.id = "ghostty.btop", .isterm = 1, .scratchkey = 'b'),
+      SCRATCH(.id = "signal", .scratchkey = 's'),
     };
 
     /* layout(s) */
@@ -165,6 +166,7 @@ in
 
     /* named scratchpads - First arg only serves to match against key in rules*/
     static const char *termscratch[] = { "t", "ghostty", "--class=ghostty.term", "--title=Terminal", NULL };
+    static const char *btopscratch[] = { "b", "ghostty", "--class=ghostty.btop", "--title=Btop", "-e", "btop", NULL };
     static const char *notescratch[] = { "n", "ghostty", "--class=ghostty.note", "--title=Notes", "-e", "tmux new-session -As Notes -c ~/Documents/Notes/Contents 'direnv exec . nvim'", NULL };
     static const char *signalscratch[] = { "s", "signal-desktop", NULL };
 
@@ -181,6 +183,7 @@ in
     	{ MODKEY,                    XKB_KEY_t,      focusortogglematchingscratch, {.v = termscratch} },
     	{ MODKEY,                    XKB_KEY_n,      focusortogglematchingscratch, {.v = notescratch} },
     	{ MODKEY,                    XKB_KEY_s,      focusortogglematchingscratch, {.v = signalscratch} },
+    	{ MODKEY,                    XKB_KEY_b,      focusortogglematchingscratch, {.v = signalscratch} },
     	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
     	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          movestack,      {.i = +1} },
