@@ -1,6 +1,6 @@
 {
   pkgs,
-  autostart ? ''"echo"'',
+  autostart,
   borderpx ? 1,
   bordercolor ? "0x080808ff",
   focuscolor ? "0xffffffff",
