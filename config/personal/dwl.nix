@@ -25,7 +25,6 @@ in
     static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
     static const int smartborders              = 1;
     static const unsigned int borderpx         = ${toString borderpx};  /* border pixel of windows */
-    static const int draw_minimal_borders      = 1; /* merge adjacent borders */
     static const float rootcolor[]             = COLOR(${toString rootcolor});
     static const float bordercolor[]           = COLOR(${toString bordercolor});
     static const float focuscolor[]            = COLOR(${toString focuscolor});
@@ -53,6 +52,7 @@ in
       SCRATCH(.id = "ghostty.term", .isterm = 1, .scratchkey = 't'),
       SCRATCH(.id = "ghostty.note", .isterm = 1, .scratchkey = 'n'),
       SCRATCH(.id = "ghostty.btop", .isterm = 1, .scratchkey = 'b'),
+      SCRATCH(.id = "ghostty.music", .isterm = 1, .scratchkey = 'm'),
       SCRATCH(.id = "signal", .scratchkey = 's'),
     };
 
@@ -167,6 +167,7 @@ in
     /* named scratchpads - First arg only serves to match against key in rules*/
     static const char *termscratch[] = { "t", "ghostty", "--class=ghostty.term", "--title=Terminal", NULL };
     static const char *btopscratch[] = { "b", "ghostty", "--class=ghostty.btop", "--title=Btop", "-e", "btop", NULL };
+    static const char *musicscratch[] = { "b", "ghostty", "--class=ghostty.music", "--title=Music", "-e", "spotify_player", NULL };
     static const char *notescratch[] = { "n", "ghostty", "--class=ghostty.note", "--title=Notes", "-e", "tmux new-session -As Notes -c ~/Documents/Notes/Contents 'direnv exec . nvim'", NULL };
     static const char *signalscratch[] = { "s", "signal-desktop", NULL };
 
@@ -184,6 +185,7 @@ in
     	{ MODKEY,                    XKB_KEY_n,      focusortogglematchingscratch, {.v = notescratch} },
     	{ MODKEY,                    XKB_KEY_s,      focusortogglematchingscratch, {.v = signalscratch} },
     	{ MODKEY,                    XKB_KEY_b,      focusortogglematchingscratch, {.v = btopscratch} },
+    	{ MODKEY,                    XKB_KEY_m,      focusortogglematchingscratch, {.v = musicscratch} },
     	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
     	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          movestack,      {.i = +1} },
