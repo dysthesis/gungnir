@@ -48,6 +48,7 @@ in
       RULE(.id = "ghostty", .isterm = 1),
       RULE(.id = "zen", .tags = 1 << 0),
       RULE(.id = "vesktop", .tags = 1 << 2),
+      RULE(.id = "mpv", .tags = 1 << 3),
 
       SCRATCH(.id = "ghostty.term", .isterm = 1, .scratchkey = 't'),
       SCRATCH(.id = "ghostty.note", .isterm = 1, .scratchkey = 'n'),
