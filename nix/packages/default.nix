@@ -18,11 +18,11 @@ in {
     inherit (sources) dwl;
   };
 
-  dwl = makeOverridable callPackage ./dwl.nix {
+  dwl = makeOverridable callPackage ./dwl.nix rec {
     inherit self lib;
     inherit (sources) dwl;
     withCustomConfigH = true;
-    configH = import ../../config/personal/dwl.nix {inherit pkgs lib;};
+    configH = import ../../config/personal/dwl.nix {inherit pkgs lib autostart;};
     enableXWayland = true;
     autostart = ''"echo"'';
   };
