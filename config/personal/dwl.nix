@@ -9,32 +9,6 @@
   ...
 }: let
   inherit (pkgs) writeText;
-  inherit
-    (lib)
-    mapAttrsToList
-    fold
-    ;
-  inherit
-    (builtins)
-    typeOf
-    concatStringsSep
-    ;
-  mkRule = rules: let
-    formatValue = value:
-      if typeOf value == "str"
-      then "\"${value}\""
-      else value;
-    formatRule = key: value: ".${key} = ${formatValue value}";
-    formattedRules = rules: mapAttrsToList (key: value: formatRule key value) rules;
-    finalRule = rules: "RULE(${concatStringsSep ", " (formattedRules rules)})";
-  in
-    fold
-    (curr: acc: ''
-      ${acc}
-      ${finalRule curr}
-    '')
-    ""
-    rules;
 in
   writeText "config.h"
   /*
@@ -70,11 +44,15 @@ in
 
     /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
     #define RULE(...) { .monitor = -1, __VA_ARGS__ }
+    #define SCRATCH(...) { .monitor = -1, .isfloating = 1, .w = 0.75f, .h = 0.75f, __VA_ARGS__ }
     static const Rule rules[] = {
       RULE(.id = "ghostty", .isterm = 1),
       RULE(.id = "zen", .tags = 1 << 0),
       RULE(.id = "vesktop", .tags = 1 << 2),
-      RULE(.id = "ghostty.term", .isterm = 1, .isfloating = 1, .scratchkey = 't'),
+
+      SCRATCH(.id = "ghostty.term", .isterm = 1, .scratchkey = 't'),
+      SCRATCH(.id = "ghostty.note", .isterm = 1, .scratchkey = 'n'),
+      SCRATCH(.id = "signal", .scratchkey = 'n'),
     };
 
     /* layout(s) */
@@ -187,6 +165,8 @@ in
 
     /* named scratchpads - First arg only serves to match against key in rules*/
     static const char *termscratch[] = { "t", "ghostty", "--class=ghostty.term", "--title=Terminal", NULL };
+    static const char *notescratch[] = { "n", "ghostty", "--class=ghostty.note", "--title=Notes", "-e", "tmux new-session -As Notes -c ~/Documents/Notes/Contents 'direnv exec . nvim'", NULL };
+    static const char *signalscratch[] = { "s", "signal-desktop", NULL };
 
     static const Key keys[] = {
     	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -198,7 +178,9 @@ in
       {0, XKB_KEY_XF86MonBrightnessUp, spawn, {.v = raisebright}},
       {0, XKB_KEY_XF86MonBrightnessDown, spawn, {.v = lowerbright}},
       {MODKEY, XKB_KEY_p, spawn, SHCMD("grim -g \"$(slurp)\" - | swappy -f -\'\'")},
-    	{ MODKEY,                    XKB_KEY_t,      focusortogglematchingscratch, {.v = termscratch } },
+    	{ MODKEY,                    XKB_KEY_t,      focusortogglematchingscratch, {.v = termscratch} },
+    	{ MODKEY,                    XKB_KEY_n,      focusortogglematchingscratch, {.v = notescratch} },
+    	{ MODKEY,                    XKB_KEY_s,      focusortogglematchingscratch, {.v = signalscratch} },
     	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
     	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          movestack,      {.i = +1} },
