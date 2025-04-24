@@ -183,6 +183,7 @@ in
     	/* modifier                  key                 function        argument */
     	{ MODKEY,                    XKB_KEY_r,          spawn,          {.v = menucmd} },
     	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
+    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_l,          spawn,           SHCMD("swaylock -f") },
     	{0, XKB_KEY_XF86AudioRaiseVolume, spawn, {.v = raisevol}},
       {0, XKB_KEY_XF86AudioLowerVolume, spawn, {.v = lowervol}},
       {0, XKB_KEY_XF86MonBrightnessUp, spawn, {.v = raisebright}},
