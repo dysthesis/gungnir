@@ -93,6 +93,7 @@ assert withCustomConfigH -> (configH != null);
 
     postInstall = ''
       cp config.h $out/
+      cp -r $src $out/src
     '';
 
     strictDeps = true;
