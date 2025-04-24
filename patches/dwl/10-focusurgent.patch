@@ -2,12 +2,14 @@ diff --git i/dwl.c w/dwl.c
 index a2711f6..40b017d 100644
 --- i/dwl.c
 +++ w/dwl.c
-@@ -2938,11 +2938,8 @@ urgent(struct wl_listener *listener, void *data)
+@@ -2938,11 +2938,10 @@ urgent(struct wl_listener *listener, void *data)
  	if (!c || c == focustop(selmon))
  		return;
  
 -	c->isurgent = 1;
-+  focusclient(c, 1);
++  if (!c || !client_surface(c)->mapped)
++		return;
++	focusclient(c, 1);
  	printstatus();
 -
 -	if (client_surface(c)->mapped)
