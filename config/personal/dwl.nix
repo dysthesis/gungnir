@@ -39,8 +39,8 @@ in
     static const float rootcolor[]             = COLOR(0x000000ff);
     static uint32_t colors[][3]                = {
      /*               fg          bg          border    */
-     [SchemeNorm] = { 0xfffffffff, COLOR(${toString rootcolor}), COLOR(${toString bordercolor}) },
-     [SchemeSel]  = { 0x000000ff, COLOR(${toString focuscolor}), COLOR(${toString focuscolor}) },
+     [SchemeNorm] = { 0xffffffff, 0x080808ff, 0x191919ff },
+     [SchemeSel]  = { 0xffffffff, 0x191919ff, 0xffffffff },
      [SchemeUrg]  = { 0,          0,          0x770000ff },
     };
 
