@@ -20,6 +20,7 @@ in rec {
   dwl-default = callPackage ./dwl.nix {
     inherit self lib;
     inherit (sources) dwl;
+    withCustomConfigH = false;
   };
 
   dwl-config = makeOverridable callPackage ../../config/personal/dwl.nix {
