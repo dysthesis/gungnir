@@ -25,18 +25,28 @@ in
     static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
     static const int smartborders              = 1;
     static const unsigned int borderpx         = ${toString borderpx};  /* border pixel of windows */
-    static const float rootcolor[]             = COLOR(${toString rootcolor});
-    static const float bordercolor[]           = COLOR(${toString bordercolor});
-    static const float focuscolor[]            = COLOR(${toString focuscolor});
-    static const float urgentcolor[]           = COLOR(${toString urgentcolor});
+    static const int user_bh		   = 30; /* 0 means that dwl will calculate barheight, >= 1 means dwl will use user_bh as the bar height. */
+    static const unsigned int systrayspacing   = 2; /* systray spacing */
+    static const int showsystray               = 1; /* 0 means no systray */
     /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
     static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You can also use glsl colors */
     static const int respect_monitor_reserved_area = 0;  /* 1 to monitor center while respecting the monitor's reserved area, 0 to monitor center */
     static int enableautoswallow = 1; /* enables autoswallowing newly spawned clients */
     static float swallowborder = 1.0f; /* add this multiplied by borderpx to border when a client is swallowed */
+    static const int showbar                   = 1; /* 0 means no bar */
+    static const int topbar                    = 0; /* 0 means bottom bar */
+    static const char *fonts[]                 = {"JBMono Nerd Font:size=10"};
+    static const float rootcolor[]             = COLOR(0x000000ff);
+    static uint32_t colors[][3]                = {
+     /*               fg          bg          border    */
+     [SchemeNorm] = { 0xfffffffff, COLOR(${toString rootcolor}), COLOR(${toString bordercolor}) },
+     [SchemeSel]  = { 0x000000ff, COLOR(${toString focuscolor}), COLOR(${toString focuscolor}) },
+     [SchemeUrg]  = { 0,          0,          0x770000ff },
+    };
 
     /* tagging - TAGCOUNT must be no greater than 31 */
-    #define TAGCOUNT (9)
+    static char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+    static const size_t num_tags = sizeof(tags) / sizeof(tags[0]);  // yields 9
 
     /* logging */
     static int log_level = WLR_ERROR;
@@ -69,13 +79,6 @@ in
     	{ "  ",      tile },
     	{ "  ",      NULL },    /* no layout function means floating behavior */
     	{ "   ",      monocle },
-    };
-
-    /* size(s) */
-    static const Size sizes[] = {
-    	/* width   height */
-    	{ 1000,    0.75f },
-    	{ 500,     0.5f },
     };
 
     /* monitors */
@@ -163,6 +166,7 @@ in
     /* commands */
     static const char *termcmd[] = { "ghostty", NULL };
     static const char *menucmd[] = { "bemenu-run", NULL };
+    static const char *dmenucmd[] = { "bemenu", NULL };
     const char *raisevol[] = {
         "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL,
     };
@@ -208,15 +212,10 @@ in
     	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
     	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
     	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
-    	{ MODKEY,                    XKB_KEY_b,          setsize,        {.v = &sizes[0]} },
-    	{ MODKEY,                    XKB_KEY_n,          setsize,        {.v = &sizes[1]} },
-    	{ MODKEY,                    XKB_KEY_c,          setminsize,     {0} },
-    	{ MODKEY,                    XKB_KEY_v,          setmaxsize,     {0} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
     	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
     	{ MODKEY,                    XKB_KEY_a,          toggleswallow,  {0} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_A,          toggleautoswallow,{0} },
-    	{ MODKEY,                    XKB_KEY_x,          movecenter,     {0} },
     	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
     	{ MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },
@@ -245,8 +244,16 @@ in
     };
 
     static const Button buttons[] = {
-    	{ MODKEY, BTN_LEFT,   moveresize,     {.ui = CurMove} },
-    	{ MODKEY, BTN_MIDDLE, togglefloating, {0} },
-    	{ MODKEY, BTN_RIGHT,  moveresize,     {.ui = CurResize} },
+    	{ ClkLtSymbol, 0,      BTN_LEFT,   setlayout,      {.v = &layouts[0]} },
+    	{ ClkLtSymbol, 0,      BTN_RIGHT,  setlayout,      {.v = &layouts[2]} },
+    	{ ClkTitle,    0,      BTN_MIDDLE, zoom,           {0} },
+    	{ ClkStatus,   0,      BTN_MIDDLE, spawn,          {.v = termcmd} },
+    	{ ClkClient,   MODKEY, BTN_LEFT,   moveresize,     {.ui = CurMove} },
+    	{ ClkClient,   MODKEY, BTN_MIDDLE, togglefloating, {0} },
+    	{ ClkClient,   MODKEY, BTN_RIGHT,  moveresize,     {.ui = CurResize} },
+    	{ ClkTagBar,   0,      BTN_LEFT,   view,           {0} },
+    	{ ClkTagBar,   0,      BTN_RIGHT,  toggleview,     {0} },
+    	{ ClkTagBar,   MODKEY, BTN_LEFT,   tag,            {0} },
+    	{ ClkTagBar,   MODKEY, BTN_RIGHT,  toggletag,      {0} },
     };
   ''

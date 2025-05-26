@@ -58,6 +58,23 @@ index b1a8f0d..1c1ee96 100644
  			newtags |= r->tags;
  			i = 0;
  			wl_list_for_each(m, &mons, link) {
+@@ -2603,6 +2609,16 @@ spawn(const Arg *arg)
+ 	}
+ }
+ 
++void spawnscratch(const Arg *arg)
++{
++	if (fork() == 0) {
++		dup2(STDERR_FILENO, STDOUT_FILENO);
++		setsid();
++		execvp(((char **)arg->v)[1], ((char **)arg->v)+1);
++		die("dwl: execvp %s failed:", ((char **)arg->v)[1]);
++	}
++}
++
+ void
+ startdrag(struct wl_listener *listener, void *data)
+ {
 @@ -2738,6 +2744,16 @@ spawn(const Arg *arg)
  	}
  }
@@ -105,3 +122,139 @@ index b1a8f0d..1c1ee96 100644
  void
  toggletag(const Arg *arg)
  {
+
+-- 
+2.45.2
+
+
+From 4963c34b4958fba9d53a23a1c9929d554a4e8b3d Mon Sep 17 00:00:00 2001
+From: Ben Collerson <benc@benc.cc>
+Date: Sat, 13 Jul 2024 14:50:45 +1000
+Subject: [PATCH 2/2] namedscratchpads: focusortoggle functions
+
+---
+ config.def.h |  2 ++
+ dwl.c        | 87 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 89 insertions(+)
+
+diff --git a/config.def.h b/config.def.h
+index 36a691a9..21bb66bb 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -132,5 +132,8 @@ static const Key keys[] = {
+ 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
+ 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
++	{ MODKEY,                    XKB_KEY_grave,      togglescratch,  {.v = scratchpadcmd } },
++	// { MODKEY,                    XKB_KEY_grave,      focusortogglescratch, {.v = scratchpadcmd } },
++	// { MODKEY,                    XKB_KEY_grave,      focusortogglematchingscratch, {.v = scratchpadcmd } },
+ 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
+ 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
+ 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
+diff --git a/dwl.c b/dwl.c
+index eb0eb775..d7c5552f 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -286,6 +286,8 @@ static void destroykeyboardgroup(struct wl_listener *listener, void *data);
+ static Monitor *dirtomon(enum wlr_direction dir);
+ static void focusclient(Client *c, int lift);
+ static void focusmon(const Arg *arg);
++static void focusortogglematchingscratch(const Arg *arg);
++static void focusortogglescratch(const Arg *arg);
+ static void focusstack(const Arg *arg);
+ static Client *focustop(Monitor *m);
+ static void fullscreennotify(struct wl_listener *listener, void *data);
+@@ -1405,6 +1407,91 @@ focusmon(const Arg *arg)
+ 	focusclient(focustop(selmon), 1);
+ }
+ 
++void
++focusortogglematchingscratch(const Arg *arg)
++{
++	Client *c;
++	unsigned int found = 0;
++	unsigned int hide = 0;
++
++	wl_list_for_each(c, &clients, link) {
++		if (c->scratchkey == 0) {
++			continue;
++		}
++		if (c->scratchkey == ((char**)arg->v)[0][0]) {
++			if (VISIBLEON(c, selmon)) {
++				if (found == 1) {
++					if (hide == 1) {
++						c->tags = 0;
++						focusclient(focustop(selmon), 1);
++					}
++					continue;
++				}
++				if (focustop(selmon) == c) {
++					// hide
++					c->tags = 0;
++					focusclient(focustop(selmon), 1);
++					hide = 1;
++				} else {
++					// focus
++					focusclient(c, 1);
++				}
++			} else {
++				// show
++				c->tags = selmon->tagset[selmon->seltags];
++				// focus
++				focusclient(c, 1);
++			}
++			found = 1;
++			continue;
++		}
++		if (VISIBLEON(c, selmon)) {
++			// hide
++			c->tags = 0;
++		}
++	}
++
++	if (found) {
++		arrange(selmon);
++	} else {
++		spawnscratch(arg);
++	}
++}
++
++void
++focusortogglescratch(const Arg *arg)
++{
++	Client *c;
++	unsigned int found = 0;
++
++	/* search for first window that matches the scratchkey */
++	wl_list_for_each(c, &clients, link)
++		if (c->scratchkey == ((char**)arg->v)[0][0]) {
++			found = 1;
++			break;
++		}
++
++	if (found) {
++		if (VISIBLEON(c, selmon)) {
++			if (focustop(selmon) == c) {
++				// hide
++				c->tags = 0;
++				focusclient(focustop(selmon), 1);
++			} else {
++				// focus
++				focusclient(c, 1);
++			}
++		} else {
++			// show
++			c->tags = selmon->tagset[selmon->seltags];
++			focusclient(c, 1);
++		}
++		arrange(selmon);
++	} else{
++		spawnscratch(arg);
++	}
++}
++
+ void
+ focusstack(const Arg *arg)
+ {
+-- 
+2.45.2
+
