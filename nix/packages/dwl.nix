@@ -4,6 +4,7 @@
   installShellFiles,
   libX11,
   libdrm,
+  dbus,
   fcft,
   tllist,
   libinput,
@@ -68,6 +69,8 @@ assert withCustomConfigH -> (configH != null);
         fcft
         tllist
         libdrm
+        # bar-systray patch
+        dbus
       ]
       ++ lib.optionals enableXWayland [
         libX11
