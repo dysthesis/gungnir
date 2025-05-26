@@ -100,16 +100,13 @@ assert withCustomConfigH -> (configH != null);
         ''XLIBS="xcb xcb-icccm"''
       ];
 
-    installPhase = ''
-      runHook preInstall
-      mkdir -p $out/src
-      cp -R . $out/src
-      runHook postInstall
-    '';
-
-    postInstall = ''
-      cp config.h $out/
-    '';
+    # NOTE: Uncomment this to get source code for inspection
+    # installPhase = ''
+    #   runHook preInstall
+    #   mkdir -p $out/src
+    #   cp -R . $out/src
+    #   runHook postInstall
+    # '';
 
     strictDeps = true;
 
