@@ -1,3 +1,4 @@
+
 From c68652d63fba89ba19efd31010c4400b3d840501 Mon Sep 17 00:00:00 2001
 From: Ben Collerson <benc@benc.cc>
 Date: Thu, 4 Jan 2024 16:35:05 +1000
@@ -27,7 +28,7 @@ index b1a8f0d..1c1ee96 100644
  } Rule;
  
  typedef struct {
-@@ -345,5 +347,6 @@ static void setpsel(struct wl_listener *listener, void *data);
+@@ -345,6 +347,7 @@ static void setpsel(struct wl_listener *listener, void *data);
  static void setsel(struct wl_listener *listener, void *data);
  static void setup(void);
  static void spawn(const Arg *arg);
@@ -35,7 +36,7 @@ index b1a8f0d..1c1ee96 100644
  static void startdrag(struct wl_listener *listener, void *data);
  static void tag(const Arg *arg);
  static void tagmon(const Arg *arg);
-@@ -352,6 +355,7 @@ static void tile(Monitor *m);
+@@ -352,5 +355,6 @@ static void tile(Monitor *m);
  static void togglefloating(const Arg *arg);
  static void togglefullscreen(const Arg *arg);
 +static void togglescratch(const Arg *arg);
@@ -58,23 +59,6 @@ index b1a8f0d..1c1ee96 100644
  			newtags |= r->tags;
  			i = 0;
  			wl_list_for_each(m, &mons, link) {
-@@ -2603,6 +2609,16 @@ spawn(const Arg *arg)
- 	}
- }
- 
-+void spawnscratch(const Arg *arg)
-+{
-+	if (fork() == 0) {
-+		dup2(STDERR_FILENO, STDOUT_FILENO);
-+		setsid();
-+		execvp(((char **)arg->v)[1], ((char **)arg->v)+1);
-+		die("dwl: execvp %s failed:", ((char **)arg->v)[1]);
-+	}
-+}
-+
- void
- startdrag(struct wl_listener *listener, void *data)
- {
 @@ -2738,6 +2744,16 @@ spawn(const Arg *arg)
  	}
  }
@@ -122,7 +106,6 @@ index b1a8f0d..1c1ee96 100644
  void
  toggletag(const Arg *arg)
  {
-
 -- 
 2.45.2
 

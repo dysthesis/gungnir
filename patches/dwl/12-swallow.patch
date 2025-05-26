@@ -139,7 +139,7 @@ index def2562..71d500a 100644
  static void pointerfocus(Client *c, struct wlr_surface *surface,
  		double sx, double sy, uint32_t time);
  static void printstatus(void);
-@@ -335,14 +344,18 @@ static void setsel(struct wl_listener *listener, void *data);
+@@ -335,15 +344,19 @@ static void setsel(struct wl_listener *listener, void *data);
  static void setup(void);
  static void spawn(const Arg *arg);
  static void spawnscratch(const Arg *arg);
@@ -155,10 +155,11 @@ index def2562..71d500a 100644
  static void togglefullscreen(const Arg *arg);
 +static void toggleswallow(const Arg *arg);
 +static void toggleautoswallow(const Arg *arg);
+ static void togglescratch(const Arg *arg);
  static void toggletag(const Arg *arg);
  static void toggleview(const Arg *arg);
  static void trayactivate(const Arg *arg);
-@@ -466,11 +479,15 @@ applyrules(Client *c)
+@@ -466,12 +479,16 @@ applyrules(Client *c)
  	if (!(title = client_get_title(c)))
  		title = broken;
  
@@ -168,6 +169,7 @@ index def2562..71d500a 100644
  		if ((!r->title || strstr(title, r->title))
  				&& (!r->id || strstr(appid, r->id))) {
  			c->isfloating = r->isfloating;
+ 			c->scratchkey = r->scratchkey;
  			newtags |= r->tags;
 +			c->isterm = r->isterm;
 +			c->noswallow = r->noswallow;
