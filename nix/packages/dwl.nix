@@ -3,6 +3,8 @@
   lib,
   installShellFiles,
   libX11,
+  fcft,
+  tllist,
   libinput,
   libxcb,
   libxkbcommon,
@@ -62,6 +64,9 @@ stdenv.mkDerivation (finalAttrs: {
       wayland
       wayland-protocols
       wlroots
+      # bar patch
+      fcft
+      tllist
     ]
     ++ lib.optionals enableXWayland [
       libX11
