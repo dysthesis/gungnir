@@ -3,6 +3,7 @@
   lib,
   installShellFiles,
   libX11,
+  libdrm,
   fcft,
   tllist,
   libinput,
@@ -66,6 +67,7 @@ assert withCustomConfigH -> (configH != null);
         # bar patch
         fcft
         tllist
+        libdrm
       ]
       ++ lib.optionals enableXWayland [
         libX11
@@ -95,9 +97,15 @@ assert withCustomConfigH -> (configH != null);
         ''XLIBS="xcb xcb-icccm"''
       ];
 
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/src
+      cp -R . $out/src
+      runHook postInstall
+    '';
+
     postInstall = ''
       cp config.h $out/
-      cp -r $src $out/src
     '';
 
     strictDeps = true;
