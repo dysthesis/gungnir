@@ -35,7 +35,7 @@ in
     static float swallowborder = 1.0f; /* add this multiplied by borderpx to border when a client is swallowed */
     static const int showbar                   = 1; /* 0 means no bar */
     static const int topbar                    = 0; /* 0 means bottom bar */
-    static const char *fonts[]                 = {"JBMono Nerd Font:size=10"};
+    static const char *fonts[]                 = {"JBMono Nerd Font:size=8"};
     static const float rootcolor[]             = COLOR(0x000000ff);
     static uint32_t colors[][3]                = {
      /*               fg          bg          border    */
