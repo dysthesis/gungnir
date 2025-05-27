@@ -2,7 +2,7 @@
   pkgs,
   autostart,
   borderpx ? 1,
-  bordercolor ? "0x080808ff",
+  bordercolor ? "0x060606ff",
   focuscolor ? "0xffffffff",
   urgentcolor ? "0xffaa88ff",
   rootcolor ? "0x222222ff",
@@ -35,11 +35,11 @@ in
     static float swallowborder = 1.0f; /* add this multiplied by borderpx to border when a client is swallowed */
     static const int showbar                   = 1; /* 0 means no bar */
     static const int topbar                    = 0; /* 0 means bottom bar */
-    static const char *fonts[]                 = {"JBMono Nerd Font:size=8"};
+    static const char *fonts[]                 = {"JBMono Nerd Font:size=9"};
     static const float rootcolor[]             = COLOR(0x000000ff);
     static uint32_t colors[][3]                = {
      /*               fg          bg          border    */
-     [SchemeNorm] = { 0xffffffff, 0x080808ff, 0x191919ff },
+     [SchemeNorm] = { 0xffffffff, 0x060606ff, 0x191919ff },
      [SchemeSel]  = { 0xffffffff, 0x191919ff, 0xffffffff },
      [SchemeUrg]  = { 0,          0,          0x770000ff },
     };
@@ -165,8 +165,8 @@ in
 
     /* commands */
     static const char *termcmd[] = { "ghostty", NULL };
-    static const char *menucmd[] = { "bemenu-run", NULL };
-    static const char *dmenucmd[] = { "bemenu", NULL };
+    static const char *menucmd[] = { "bemenu", NULL };
+    static const char *dmenucmd[] = { "bemenu-run", NULL };
     const char *raisevol[] = {
         "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL,
     };
@@ -185,7 +185,7 @@ in
     static const Key keys[] = {
     	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
     	/* modifier                  key                 function        argument */
-    	{ MODKEY,                    XKB_KEY_r,          spawn,          {.v = menucmd} },
+    	{ MODKEY,                    XKB_KEY_r,          spawn,          {.v = dmenucmd} },
     	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_l,          spawn,           SHCMD("swaylock -f") },
     	{0, XKB_KEY_XF86AudioRaiseVolume, spawn, {.v = raisevol}},
