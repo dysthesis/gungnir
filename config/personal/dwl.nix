@@ -2,7 +2,7 @@
   pkgs,
   autostart,
   borderpx ? 1,
-  bordercolor ? "0x060606ff",
+  bordercolor ? "0x040404ff",
   focuscolor ? "0xffffffff",
   urgentcolor ? "0xffaa88ff",
   rootcolor ? "0x222222ff",
@@ -21,6 +21,8 @@ in
                             ((hex >> 8) & 0xFF) / 255.0f, \
                             (hex & 0xFF) / 255.0f }
     /* appearance */
+
+    static const int centeredtitle             = 1; /* 1 means centered title */
     static const int sloppyfocus               = 1;  /* focus follows mouse */
     static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
     static const int smartborders              = 1;
@@ -39,7 +41,7 @@ in
     static const float rootcolor[]             = COLOR(0x000000ff);
     static uint32_t colors[][3]                = {
      /*               fg          bg          border    */
-     [SchemeNorm] = { 0xffffffff, 0x060606ff, 0x191919ff },
+     [SchemeNorm] = { 0xffffffff, 0x040404ff, 0x191919ff },
      [SchemeSel]  = { 0xffffffff, 0x191919ff, 0xffffffff },
      [SchemeUrg]  = { 0,          0,          0x770000ff },
     };
