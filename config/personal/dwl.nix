@@ -61,7 +61,7 @@ in
 
     /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
     #define RULE(...) { .monitor = -1, __VA_ARGS__ }
-    #define SCRATCH(...) { .monitor = -1, .isfloating = 1, .w = 0.75, .h = 0.75, __VA_ARGS__ }
+    #define SCRATCH(...) RULE(.isfloating = 1, .x = 0, .y = 0, .w = 0.75, .h = 0.75, __VA_ARGS__)
     static const Rule rules[] = {
       RULE(.id = "ghostty", .isterm = 1),
       RULE(.id = "zen", .tags = 1 << 0),
