@@ -22,17 +22,21 @@ index 6f041a0..79ace52 100644
  	setmon(c, mon, newtags);
  }
  
-@@ -1677,6 +1681,10 @@ mapnotify(struct wl_listener *listener, void *data)
- 	 * try to apply rules for them */
- 	if ((p = client_get_parent(c))) {
- 		c->isfloating = 1;
-+		if (p->mon) {
-+			c->geom.x = (p->mon->w.width - c->geom.width) / 2 + p->mon->m.x;
-+			c->geom.y = (p->mon->w.height - c->geom.height) / 2 + p->mon->m.y;
-+		}
- 		setmon(c, p->mon, p->tags);
+diff --git a/dwl.c b/dwl.c
+index 9e51c79..8a32522 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -1629,6 +1629,10 @@ mapnotify(struct wl_listener *listener, void *data)
  	} else {
  		applyrules(c);
+ 	}
++	if (c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
++		c->geom.x = (c->mon->w.width - c->geom.width) / 2 + c->mon->m.x;
++		c->geom.y = (c->mon->w.height - c->geom.height) / 2 + c->mon->m.y;
++	}
+ 	printstatus();
+ 
+ unset_fullscreen:
 -- 
 2.45.1
 
