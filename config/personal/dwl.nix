@@ -101,6 +101,12 @@ in
     	{ NULL,       0.5f, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
     };
 
+    static const TagRule tagrules[] = {
+      /* tag     mfact      nmaster   layout */
+      /* defaults */
+      { 0,       0.55,      1,        &layouts[0] }
+    };
+
     /* keyboard */
     static const struct xkb_rule_names xkb_rules = {
     	/* can specify fields: rules, model, layout, variant, options */
