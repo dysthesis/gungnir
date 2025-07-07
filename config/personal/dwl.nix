@@ -179,7 +179,7 @@ in
     static const char *termcmd[] = { "ghostty", NULL };
     static const char *menucmd[] = { "bemenu", NULL };
     static const char *dmenucmd[] = { "bemenu-run", NULL };
-    static const char *lockcmd[] = { "swaylock", "-f", NULL };
+    static const char *lockcmd[] = { "swaylock", NULL };
     static const char *screenshotcmd[] = { "slurp", "|", "grim", "-g", "-", "-", "|", "wl-copy", NULL };
     const char *raisevol[] = {
         "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL,
