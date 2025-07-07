@@ -27,7 +27,7 @@ in
     static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
     static const int smartborders              = 1;
     static const unsigned int borderpx         = ${toString borderpx};  /* border pixel of windows */
-    static const int user_bh		   = 30; /* 0 means that dwl will calculate barheight, >= 1 means dwl will use user_bh as the bar height. */
+    static const int user_bh		   = 26; /* 0 means that dwl will calculate barheight, >= 1 means dwl will use user_bh as the bar height. */
     static const unsigned int systrayspacing   = 2; /* systray spacing */
     static const int showsystray               = 1; /* 0 means no systray */
     /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
@@ -189,7 +189,7 @@ in
     /* named scratchpads - First arg only serves to match against key in rules*/
     static const char *termscratch[] = { "t", "ghostty", "--class=ghostty.term", "--title=Terminal", NULL };
     static const char *btopscratch[] = { "b", "ghostty", "--class=ghostty.btop", "--title=Btop", "-e", "btop", NULL };
-    static const char *musicscratch[] = { "b", "ghostty", "--class=ghostty.music", "--title=Music", "-e", "spotify_player", NULL };
+    static const char *musicscratch[] = { "m", "ghostty", "--class=ghostty.music", "--title=Music", "-e", "spotify_player", NULL };
     static const char *notescratch[] = { "n", "ghostty", "--class=ghostty.note", "--title=Notes", "-e", "tmux new-session -As Notes -c ~/Documents/Notes/Contents 'direnv exec . nvim'", NULL };
     static const char *ircscratch[] = { "i", "ghostty", "--class=ghostty.irc", "--title=IRC", "-e", "tmux new-session -As IRC irssi", NULL };
     static const char *signalscratch[] = { "s", "signal-desktop", NULL };
@@ -205,30 +205,30 @@ in
       {0, XKB_KEY_XF86MonBrightnessUp, spawn, {.v = raisebright}},
       {0, XKB_KEY_XF86MonBrightnessDown, spawn, {.v = lowerbright}},
       {MODKEY, XKB_KEY_p, spawn, SHCMD("grim -g \"$(slurp)\" - | swappy -f -\'\'")},
-    	{ MODKEY,                    XKB_KEY_t,      focusortogglematchingscratch, {.v = termscratch} },
-    	{ MODKEY,                    XKB_KEY_n,      focusortogglematchingscratch, {.v = notescratch} },
-    	{ MODKEY,                    XKB_KEY_s,      focusortogglematchingscratch, {.v = signalscratch} },
-    	{ MODKEY,                    XKB_KEY_b,      focusortogglematchingscratch, {.v = btopscratch} },
-    	{ MODKEY,                    XKB_KEY_m,      focusortogglematchingscratch, {.v = musicscratch} },
-    	{ MODKEY,                    XKB_KEY_i,      focusortogglematchingscratch, {.v = ircscratch} },
-    	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
-    	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
-    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          movestack,      {.i = +1} },
-    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_K,          movestack,      {.i = -1} },
-    	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
-    	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
-    	{ MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05f} },
-    	{ MODKEY,                    XKB_KEY_l,          setmfact,       {.f = +0.05f} },
-    	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
-    	{ MODKEY,                    XKB_KEY_q,          killclient,     {0} },
-    	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-    	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
-    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
-    	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
-    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
-    	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
-    	{ MODKEY,                    XKB_KEY_a,          toggleswallow,  {0} },
-    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_A,          toggleautoswallow,{0} },
+    	{ MODKEY,                    XKB_KEY_t,          focusortogglematchingscratch, {.v = termscratch} },
+    	{ MODKEY,                    XKB_KEY_n,          focusortogglematchingscratch, {.v = notescratch} },
+    	{ MODKEY,                    XKB_KEY_s,          focusortogglematchingscratch, {.v = signalscratch} },
+    	{ MODKEY,                    XKB_KEY_b,          focusortogglematchingscratch, {.v = btopscratch} },
+    	{ MODKEY,                    XKB_KEY_m,          focusortogglematchingscratch, {.v = musicscratch} },
+    	{ MODKEY,                    XKB_KEY_i,          focusortogglematchingscratch, {.v = ircscratch} },
+    	{ MODKEY,                    XKB_KEY_j,          focusstack,                   {.i = +1} },
+    	{ MODKEY,                    XKB_KEY_k,          focusstack,                   {.i = -1} },
+    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          movestack,                    {.i = +1} },
+    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_K,          movestack,                    {.i = -1} },
+    	{ MODKEY,                    XKB_KEY_i,          incnmaster,                   {.i = +1} },
+    	{ MODKEY,                    XKB_KEY_d,          incnmaster,                   {.i = -1} },
+    	{ MODKEY,                    XKB_KEY_h,          setmfact,                     {.f = -0.05f} },
+    	{ MODKEY,                    XKB_KEY_l,          setmfact,                     {.f = +0.05f} },
+    	{ MODKEY,                    XKB_KEY_Tab,        view,                         {0} },
+    	{ MODKEY,                    XKB_KEY_q,          killclient,                   {0} },
+    	{ MODKEY,                    XKB_KEY_t,          setlayout,                    {.v = &layouts[0]} },
+    	{ MODKEY,                    XKB_KEY_f,          setlayout,                    {.v = &layouts[1]} },
+    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_m,          setlayout,                    {.v = &layouts[2]} },
+    	{ MODKEY,                    XKB_KEY_space,      setlayout,                    {0} },
+    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating,               {0} },
+    	{ MODKEY,                    XKB_KEY_e,         togglefullscreen,              {0} },
+    	{ MODKEY,                    XKB_KEY_a,          toggleswallow,                {0} },
+    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_A,          toggleautoswallow,            {0} },
     	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
     	{ MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },
