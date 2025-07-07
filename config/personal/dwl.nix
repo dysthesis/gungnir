@@ -179,6 +179,8 @@ in
     static const char *termcmd[] = { "ghostty", NULL };
     static const char *menucmd[] = { "bemenu", NULL };
     static const char *dmenucmd[] = { "bemenu-run", NULL };
+    static const char *lockcmd[] = { "swaylock", "-f", NULL };
+    static const char *screenshotcmd[] = { "slurp", "|", "grim", "-g", "-", "-", "|", "wl-copy", NULL };
     const char *raisevol[] = {
         "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL,
     };
@@ -201,12 +203,12 @@ in
     	/* modifier                  key                 function        argument */
     	{ MODKEY,                    XKB_KEY_r,          spawn,          {.v = dmenucmd} },
     	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
-    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_l,          spawn,           SHCMD("swaylock -f") },
+    	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_l,          spawn,          { .v = lockcmd }  },
     	{0, XKB_KEY_XF86AudioRaiseVolume, spawn, {.v = raisevol}},
       {0, XKB_KEY_XF86AudioLowerVolume, spawn, {.v = lowervol}},
       {0, XKB_KEY_XF86MonBrightnessUp, spawn, {.v = raisebright}},
       {0, XKB_KEY_XF86MonBrightnessDown, spawn, {.v = lowerbright}},
-      {MODKEY, XKB_KEY_p, spawn, SHCMD("grim -g \"$(slurp)\" - | swappy -f -\'\'")},
+      { MODKEY,                    XKB_KEY_p,          spawn,          { .v = screenshotcmd }},
     	{ MODKEY,                    XKB_KEY_t,          focusortogglematchingscratch, {.v = termscratch} },
     	{ MODKEY,                    XKB_KEY_n,          focusortogglematchingscratch, {.v = notescratch} },
     	{ MODKEY,                    XKB_KEY_s,          focusortogglematchingscratch, {.v = signalscratch} },
