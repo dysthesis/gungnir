@@ -192,6 +192,7 @@ in
     static const char *musicscratch[] = { "m", "ghostty", "--class=ghostty.music", "--title=Music", "-e", "spotify_player", NULL };
     static const char *notescratch[] = { "n", "ghostty", "--class=ghostty.note", "--title=Notes", "-e", "tmux new-session -As Notes -c ~/Documents/Notes/Contents 'direnv exec . nvim'", NULL };
     static const char *ircscratch[] = { "i", "ghostty", "--class=ghostty.irc", "--title=IRC", "-e", "tmux new-session -As IRC irssi", NULL };
+    static const char *taskscratch[] = { "d", "ghostty", "--class=ghostty.task", "--title=IRC", "-e", "taskwarrior-tui", NULL };
     static const char *signalscratch[] = { "s", "signal-desktop", NULL };
 
     static const Key keys[] = {
@@ -211,6 +212,7 @@ in
     	{ MODKEY,                    XKB_KEY_b,          focusortogglematchingscratch, {.v = btopscratch} },
     	{ MODKEY,                    XKB_KEY_m,          focusortogglematchingscratch, {.v = musicscratch} },
     	{ MODKEY,                    XKB_KEY_i,          focusortogglematchingscratch, {.v = ircscratch} },
+    	{ MODKEY,                    XKB_KEY_d,          focusortogglematchingscratch, {.v = taskscratch} },
     	{ MODKEY,                    XKB_KEY_j,          focusstack,                   {.i = +1} },
     	{ MODKEY,                    XKB_KEY_k,          focusstack,                   {.i = -1} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_J,          movestack,                    {.i = +1} },
