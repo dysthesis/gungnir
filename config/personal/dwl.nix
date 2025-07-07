@@ -75,6 +75,7 @@ in
       SCRATCH(.id = "ghostty.btop", .isterm = 1, .scratchkey = 'b'),
       SCRATCH(.id = "ghostty.music", .isterm = 1, .scratchkey = 'm'),
       SCRATCH(.id = "ghostty.irc", .isterm = 1, .scratchkey = 'i'),
+      SCRATCH(.id = "ghostty.task", .isterm = 1, .scratchkey = 'd'),
       SCRATCH(.id = "signal", .scratchkey = 's'),
     };
 
@@ -192,7 +193,7 @@ in
     static const char *musicscratch[] = { "m", "ghostty", "--class=ghostty.music", "--title=Music", "-e", "spotify_player", NULL };
     static const char *notescratch[] = { "n", "ghostty", "--class=ghostty.note", "--title=Notes", "-e", "tmux new-session -As Notes -c ~/Documents/Notes/Contents 'direnv exec . nvim'", NULL };
     static const char *ircscratch[] = { "i", "ghostty", "--class=ghostty.irc", "--title=IRC", "-e", "tmux new-session -As IRC irssi", NULL };
-    static const char *taskscratch[] = { "d", "ghostty", "--class=ghostty.task", "--title=IRC", "-e", "taskwarrior-tui", NULL };
+    static const char *taskscratch[] = { "d", "ghostty", "--class=ghostty.task", "--title=Task", "-e", "taskwarrior-tui", NULL };
     static const char *signalscratch[] = { "s", "signal-desktop", NULL };
 
     static const Key keys[] = {
