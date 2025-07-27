@@ -3,7 +3,7 @@
   config ? {
     font = "JBMono Nerd Font";
     fontSize = 12;
-    borderpx = 30;
+    borderpx = 15;
     fontScale = {
       width = 1.0;
       height = 1.2;
