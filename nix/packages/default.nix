@@ -76,6 +76,7 @@ in rec {
     fontSize ? 12,
     font ? "JBMono Nerd Font",
     borderpx ? 30,
+    shell ? lib.getExe pkgs.bash,
     fontScale ? {
       width = 1.0;
       height = 1.2;
@@ -110,7 +111,7 @@ in rec {
       inherit self lib;
       config-file = import ../../config/personal/st.nix {
         inherit lib pkgs;
-        config = {inherit fontSize fontScale font borderpx colours;};
+        config = {inherit fontSize fontScale font borderpx colours shell;};
       };
     };
 
