@@ -2,6 +2,7 @@
   pkgs,
   config ? {
     font = "JBMono Nerd Font";
+    shell = "/bin/sh";
     fontSize = 12;
     borderpx = 15;
     fontScale = {
@@ -63,7 +64,7 @@ in
        * 4: value of shell in /etc/passwd
        * 5: value of shell in config.h
        */
-      static char *shell = "/bin/sh";
+      static char *shell = "${shell}";
       char *utmp = NULL;
       /* scroll program: to enable use a string like "scroll" */
       char *scroll = NULL;
