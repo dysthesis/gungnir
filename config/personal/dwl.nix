@@ -27,7 +27,7 @@ in
     static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
     static const int smartborders              = 1;
     static const unsigned int borderpx         = ${toString borderpx};  /* border pixel of windows */
-    static const int user_bh		   = 26; /* 0 means that dwl will calculate barheight, >= 1 means dwl will use user_bh as the bar height. */
+    static const int user_bh		   = 24; /* 0 means that dwl will calculate barheight, >= 1 means dwl will use user_bh as the bar height. */
     static const unsigned int systrayspacing   = 2; /* systray spacing */
     static const int showsystray               = 1; /* 0 means no systray */
     /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
