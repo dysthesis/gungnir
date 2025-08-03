@@ -28,7 +28,7 @@ in rec {
     autostart = "";
   };
 
-  dwl = makeOverridable callPackage ./dwl.nix rec {
+  dwl = makeOverridable callPackage ./dwl.nix {
     inherit self lib;
     inherit (sources) dwl;
     withCustomConfigH = true;

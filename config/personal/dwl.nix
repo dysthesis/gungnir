@@ -1,11 +1,16 @@
 {
   pkgs,
   autostart,
+  font ? "JBMono Nerd Font:size=9",
   borderpx ? 1,
   bordercolor ? "0x040404ff",
   focuscolor ? "0xffffffff",
   urgentcolor ? "0xffaa88ff",
-  rootcolor ? "0x222222ff",
+  rootcolor ? "0x191919ff",
+  termcmd ? "ghostty",
+  menucmd ? "bemenu",
+  dmenucmd ? "bemenu-run",
+  lockcmd ? "swaylock",
   ...
 }: let
   inherit (pkgs) writeText;
@@ -37,13 +42,13 @@ in
     static float swallowborder = 1.0f; /* add this multiplied by borderpx to border when a client is swallowed */
     static const int showbar                   = 1; /* 0 means no bar */
     static const int topbar                    = 0; /* 0 means bottom bar */
-    static const char *fonts[]                 = {"JBMono Nerd Font:size=9"};
+    static const char *fonts[]                 = {"${font}"};
     static const float rootcolor[]             = COLOR(0x000000ff);
     static uint32_t colors[][3]                = {
      /*               fg          bg          border    */
-     [SchemeNorm] = { 0xffffffff, 0x040404ff, 0x191919ff },
-     [SchemeSel]  = { 0xffffffff, 0x191919ff, 0xffffffff },
-     [SchemeUrg]  = { 0,          0,          0x770000ff },
+     [SchemeNorm] = { ${focuscolor}, ${bordercolor}, ${rootcolor} },
+     [SchemeSel]  = { ${focuscolor}, ${rootcolor}, ${focuscolor} },
+     [SchemeUrg]  = { 0,          0,          ${urgentcolor} },
     };
 
     /* tagging - TAGCOUNT must be no greater than 31 */
@@ -176,11 +181,10 @@ in
     #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
     /* commands */
-    static const char *termcmd[] = { "ghostty", NULL };
-    static const char *menucmd[] = { "bemenu", NULL };
-    static const char *dmenucmd[] = { "bemenu-run", NULL };
-    static const char *lockcmd[] = { "swaylock", NULL };
-    static const char *screenshotcmd[] = { "slurp", "|", "grim", "-g", "-", "-", "|", "wl-copy", NULL };
+    static const char *termcmd[] = { "${termcmd}", NULL };
+    static const char *menucmd[] = { "${menucmd}", NULL };
+    static const char *dmenucmd[] = { "${dmenucmd}", NULL };
+    static const char *lockcmd[] = { "${lockcmd}", NULL };
     const char *raisevol[] = {
         "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL,
     };
@@ -208,7 +212,6 @@ in
       {0, XKB_KEY_XF86AudioLowerVolume, spawn, {.v = lowervol}},
       {0, XKB_KEY_XF86MonBrightnessUp, spawn, {.v = raisebright}},
       {0, XKB_KEY_XF86MonBrightnessDown, spawn, {.v = lowerbright}},
-      { MODKEY,                    XKB_KEY_p,          spawn,          { .v = screenshotcmd }},
     	{ MODKEY,                    XKB_KEY_t,          focusortogglematchingscratch, {.v = termscratch} },
     	{ MODKEY,                    XKB_KEY_n,          focusortogglematchingscratch, {.v = notescratch} },
     	{ MODKEY,                    XKB_KEY_s,          focusortogglematchingscratch, {.v = signalscratch} },
@@ -231,7 +234,7 @@ in
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_m,          setlayout,                    {.v = &layouts[2]} },
     	{ MODKEY,                    XKB_KEY_space,      setlayout,                    {0} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating,               {0} },
-    	{ MODKEY,                    XKB_KEY_e,         togglefullscreen,              {0} },
+    	{ MODKEY,                    XKB_KEY_e,          togglefullscreen,              {0} },
     	{ MODKEY,                    XKB_KEY_a,          toggleswallow,                {0} },
     	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_A,          toggleautoswallow,            {0} },
     	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
