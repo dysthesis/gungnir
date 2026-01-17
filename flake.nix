@@ -8,21 +8,21 @@
     };
 
     # Personal library
-    babel = {
-      url = "github:dysthesis/babel";
+    nixpressions = {
+      url = "github:dysthesis/nixpressions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = {
     self,
-    babel,
+    nixpressions,
     nixpkgs,
     treefmt-nix,
     ...
   }: let
     inherit (builtins) mapAttrs;
-    inherit (babel) mkLib;
+    inherit (nixpressions) mkLib;
     lib = mkLib nixpkgs;
 
     # Systems to support
@@ -32,7 +32,7 @@
       "x86_64-darwin"
       "aarch64-darwin"
     ];
-    forAllSystems = lib.babel.forAllSystems systems;
+    forAllSystems = lib.nixpressions.forAllSystems systems;
 
     treefmt = forAllSystems (pkgs: treefmt-nix.lib.evalModule pkgs ./nix/formatters);
   in
