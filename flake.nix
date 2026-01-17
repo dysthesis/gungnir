@@ -32,7 +32,7 @@
       "x86_64-darwin"
       "aarch64-darwin"
     ];
-    forAllSystems = lib.nixpressions.forAllSystems systems;
+    forAllSystems = lib.babel.forAllSystems systems;
 
     treefmt = forAllSystems (pkgs: treefmt-nix.lib.evalModule pkgs ./nix/formatters);
   in
